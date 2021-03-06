@@ -2,7 +2,19 @@ package com.biketrade.model;
 
 import java.util.Arrays;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "image_table")
@@ -12,11 +24,7 @@ public class ImageModel {
 		super();
 	}
 
-	public ImageModel(String name, String type, byte[] picByte) {
-		this.name = name;
-		this.type = type;
-		this.picByte = picByte;
-	}
+	
 
 	@Id
 	@Column(name = "id")
@@ -36,6 +44,36 @@ public class ImageModel {
 	@Column(name = "picByte", length = 100000)
 	@Lob
 	private byte[] picByte;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "bike_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+	private Bike bike;
+	
+
+	
+	
+
+	public ImageModel(String name, String type, byte[] picByte, Bike bike) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.picByte = picByte;
+		this.bike = bike;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Bike getBike() {
+		return bike;
+	}
+
+	public void setBike(Bike bike) {
+		this.bike = bike;
+	}
 
 	public String getName() {
 		return name;

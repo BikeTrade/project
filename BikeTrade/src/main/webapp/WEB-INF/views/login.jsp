@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%--import spring suppiled JSP tag lib for URL rewriting --%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <!DOCTYPE html>
 <%-- <html xmlns="http://www.w3.org/1999/xhtml">--%>
 <html>
@@ -25,8 +26,11 @@
     <img src="/images/login.jpg" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
     <form action="${loginURL}" method="POST" class="form-signin">
         <h3 class="form-signin-heading" >Welcome</h3>
+		        <font color="red"> ${message}</font>
+		      
+		 
         <br/>
-
+    
         <input type="text" id="user_name" name="user_name" placeholder="User Name"
                class="form-control"/> <br/>
         <input type="password" placeholder="Password"
@@ -34,6 +38,7 @@
                
         <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>
     </form>
+    
 </div>
 </body>
 </html>

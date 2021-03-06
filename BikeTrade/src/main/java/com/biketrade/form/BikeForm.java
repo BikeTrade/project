@@ -1,113 +1,75 @@
-package com.biketrade.model;
+package com.biketrade.form;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.biketrade.model.BikeStatus;
+import com.biketrade.model.BrandName;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name = "bike_for_sale")
-public class Bike {
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "bike_id")
-    private Integer id;
-	
+public class BikeForm {
 	
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "*Please Select Brand Name")
 	private BrandName brand;
 	
-	@Column(name = "model_name")
 	@NotEmpty(message = "*Please Enter Model Name")
 	private String modelName;
 	
-	@Column(name = "km_driven")
 	@NotNull(message = "*Please provid the value" )
 	private Integer running;
 	
-	@Column(name = "reg_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date regDate;
 	
-	@Column(name = "no_of_owner")
 	@NotNull(message = "*Please select no of owners")
 	private Integer noOfOwner;
 	
-	@Column(name = "insurance_status")
 	@NotNull(message = "*please select Insurance Status")
 	private boolean insurance;
 	
-	@Column(name = "insurance_exp_date")
 	@NotNull(message = "*Please provid Insurance Expiry Date" )
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date iExpDate;
 	
-	@Column(name = "price")
 	@Min(10000)
 	private Long price;
 	
-	@Column(name = "contact_no")
-	@NotNull(message = "*Please provid the value" )
+	@NotNull(message = "*Please provid the contact number" )
 	private Long contactNo;
 	
-	@Column(name = "contact_name")
 	@NotEmpty(message = "*Please provide a contact name")
 	private String contactName;
-	
-	@Column(name = "address")
+
 	@NotEmpty(message = "*Please provide a user address")
 	private String address;
 	
-	@Column(name = "bike_location")
 	@NotEmpty(message = "*Please provide bike location")
 	private String bLocation;
-
+	
 	@Enumerated(EnumType.STRING)
 	private BikeStatus status;
-		
-	@OneToMany( fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
-	private List<ImageModel> bikeImages;
-	
-	 
-	 
-	public Bike() {
-	
+
+	private MultipartFile leftImage;
+	private MultipartFile rightImage;
+	private MultipartFile frontImage;
+	private MultipartFile backImage;
+
+	public BikeForm() {
+		super();
 	}
 
-
-	public Bike(Integer id, BrandName brand, String modelName,
-			 Integer running, Date regDate, Integer noOfOwner,
-			 boolean insurance, Date iExpDate, Long price,
-			 Long contactNo, String contactName, String address,
-			 String bLocation) {
+	public BikeForm(BrandName brand, String modelName, Integer running, Date regDate, Integer noOfOwner, boolean insurance,
+			Date iExpDate, Long price, Long contactNo, String contactName, String address, String bLocation,
+			MultipartFile leftImage, MultipartFile rightImage, MultipartFile frontImage, MultipartFile backImage) {
 		super();
-		this.id = id;
 		this.brand = brand;
 		this.modelName = modelName;
 		this.running = running;
@@ -120,7 +82,10 @@ public class Bike {
 		this.contactName = contactName;
 		this.address = address;
 		this.bLocation = bLocation;
-		
+		this.leftImage = leftImage;
+		this.rightImage = rightImage;
+		this.frontImage = frontImage;
+		this.backImage = backImage;
 	}
 
 	public void setBrand( BrandName brand) {
@@ -129,6 +94,7 @@ public class Bike {
 	public  BrandName getBrand() {
 		return brand;
 	}
+
 	public String getModelName() {
 		return modelName;
 	}
@@ -216,53 +182,57 @@ public class Bike {
 	public void setbLocation(String bLocation) {
 		this.bLocation = bLocation;
 	}
+
+	public MultipartFile getLeftImage() {
+		return leftImage;
+	}
+
+	public void setLeftImage(MultipartFile leftImage) {
+		this.leftImage = leftImage;
+	}
+
+	public MultipartFile getRightImage() {
+		return rightImage;
+	}
+
+	public void setRightImage(MultipartFile rightImage) {
+		this.rightImage = rightImage;
+	}
+
+	public MultipartFile getFrontImage() {
+		return frontImage;
+	}
+
+	public void setFrontImage(MultipartFile frontImage) {
+		this.frontImage = frontImage;
+	}
+
+	public MultipartFile getBackImage() {
+		return backImage;
+	}
+
+	public void setBackImage(MultipartFile backImage) {
+		this.backImage = backImage;
+	}
+
 	
-
-
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	
-
-	
-
-
-
-	public List<ImageModel> getBikeImages() {
-		return bikeImages;
-	}
-
-
-	public void setBikeImages(List<ImageModel> bikeImages) {
-		this.bikeImages = bikeImages;
-	}
-
-
 	public BikeStatus getStatus() {
 		return status;
 	}
-
 
 	public void setStatus(BikeStatus status) {
 		this.status = status;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Bike [id=" + id + ", brand=" + brand + ", modelName=" + modelName + ", running=" + running
-				+ ", regDate=" + regDate + ", noOfOwner=" + noOfOwner + ", insurance=" + insurance + ", iExpDate="
-				+ iExpDate + ", price=" + price + ", contactNo=" + contactNo + ", contactName=" + contactName
-				+ ", address=" + address + ", bLocation=" + bLocation + ", status=" + status + "]";
+		return "BikeForm [brand=" + brand + ", modelName=" + modelName + ", running=" + running + ", regDate=" + regDate
+				+ ", noOfOwner=" + noOfOwner + ", insurance=" + insurance + ", iExpDate=" + iExpDate + ", price="
+				+ price + ", contactNo=" + contactNo + ", contactName=" + contactName + ", address=" + address
+				+ ", bLocation=" + bLocation + ", leftImage=" + leftImage + ", rightImage=" + rightImage
+				+ ", frontImage=" + frontImage + ", backImage=" + backImage + "]";
 	}
-
-
 	
-
+	
+	
 }
