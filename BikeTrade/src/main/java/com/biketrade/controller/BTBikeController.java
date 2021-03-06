@@ -49,8 +49,6 @@ public class BTBikeController {
 		ModelAndView modelAndView = new ModelAndView();
 		Role admin=user.getRoles().stream().filter(r->r.getRole().equals("ADMIN")).findFirst().orElse(null);
 		if(null==admin) {
-			
-			
 			BikeForm bikeform= new BikeForm();
 			modelAndView.addObject("bikeform",bikeform);
 			model.addAttribute("bikeform", new BikeForm());
@@ -59,23 +57,18 @@ public class BTBikeController {
 			modelAndView.setViewName("bikeregistration");	
 		}
 		else {
-			
-			
 			List <Bike> lists = bikeService.findByBikeStatus();
 			if(lists != null) {
-				
 				modelAndView.addObject("NA_list", lists );
-			
 			}else {
-				
 				modelAndView.addObject("message", "Every Bike is Approved" );
 			}
 			modelAndView.setViewName("adminpage");
-			
-			
 		}
 		return modelAndView;
 	}
+	
+	
 	@RequestMapping(value = "/registrationbike", method = RequestMethod.POST)   //to show the form
 	public ModelAndView registerNewBike(@Valid @ModelAttribute("bikeform")BikeForm bikeform, BindingResult bindingResult  ,Model model) throws IOException {
 		ModelAndView modelAndView =new ModelAndView();
@@ -113,25 +106,14 @@ public class BTBikeController {
 		images.add(rightImage);
 		images.add(frontImage);
 		images.add(backImage);
-		
-	
-					modelAndView.addObject("successMessageB", "Your bike details has been saved successfully");
-			
-					
-					//savebike.setBikeImages(images);
-					bikeService.saveBike(savebike);
+		modelAndView.addObject("successMessageB", "Your bike details has been saved successfully");
+			bikeService.saveBike(savebike);
 					imageRepository.saveAll(images);
 					modelAndView.addObject("bikeform",new BikeForm());
 					model.addAttribute("bikeform", new BikeForm());
-
+					modelAndView.setViewName("bikeregistration");
 		
-			
-		//	modelAndView.addObject("bike_id",bike.getId());
-	//	System.out.println(bike.getId() + "  <--IN bike controller");
-			//System.out.println(b + " in bike controller");
-			modelAndView.setViewName("bikeregistration"); //for next request
-		
-		return modelAndView;
+					return modelAndView;
 	}
 	
 }
