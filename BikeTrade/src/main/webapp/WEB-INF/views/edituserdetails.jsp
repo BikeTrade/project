@@ -7,18 +7,23 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>User Registration Form</title>
-   
+    <title>Update User Registration</title>
+    
 </head>
-<body>
 <btag:header />
+<body>
+<spring:url value="/login?error=false"   var="loginURL"/>
+<a href="${loginURL}" value ="Login"><h5>Go To Login Page</h5></a>
+<form action="${loginURL}" method="get">
+  <%--  <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button> --%>
+
 </form>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-        <spring:url value="/registration"  var="regURL"/>
-            <form:form autocomplete="off"  action="${regURL}" method="post" class="form-horizontal" role="form" modelAttribute="user">
-                <h2>User Registration Form</h2>
+        <spring:url value="/edit"  var="editURL"/>
+            <form:form autocomplete="off"  action="${editURL}" method="post" class="form-horizontal" role="form" modelAttribute="user">
+                <h2>Registration Form</h2>
                 <div class="form-group">
                     <div class="col-sm-9">
                        
@@ -29,7 +34,6 @@
                                </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="col-sm-9">
                         <form:input type="text" name="lastName" path="lastName"
@@ -50,26 +54,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <form:input type="text" name="name" placeholder="User Name"
-                            path="userName"   class="form-control"/> 
-                            <div class="has-error">
-                                 <form:errors path="userName" class="text-danger"/>
-                             </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <form:input type="password" name="password" path="password"
-                               placeholder="Password" class="form-control"/> 
-                         <div class="has-error">
-                                 <form:errors path="password" class="text-danger"/>
-                          </div>      
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <button type="submit" class="btn btn-primary btn-block">Register User</button>
+                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
                     </div>
                 </div>
 

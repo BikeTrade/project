@@ -2,5 +2,5 @@ package com.biketrade.model;
 
 public enum BikeStatus {
 
-APPROVED , REJECTED , NOTAPPROVED
+APPROVED , REJECTED , NOTAPPROVED, CANCELED
 }

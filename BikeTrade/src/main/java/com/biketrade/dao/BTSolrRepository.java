@@ -13,9 +13,9 @@ import com.biketrade.pojo.SBike;
 @Repository
 @Qualifier("bikeSolrRepository")
 public interface BTSolrRepository extends SolrCrudRepository<SBike, Long> {
-
-    @Query(value = "fq = brand:?0 & fq = running:[?1 TO ?2]")
-    List<SBike> getBikes(String brand,Double start,Double end);
+//fq = brand:?0 & fq = running:[?1 TO ?2]
+    @Query(value = "fq = brand:?0 ")
+    List<SBike> getBikes(String brand);
     
     List<SBike> findByBrandAndRunningBetween(String brand,String start,String end);
     

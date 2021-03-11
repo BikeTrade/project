@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -36,7 +38,7 @@ public class Bike {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "bike_id")
-    private Integer id;
+    private Long id;
 	
 	
 	@Enumerated(EnumType.STRING)
@@ -91,17 +93,19 @@ public class Bike {
 	@Enumerated(EnumType.STRING)
 	private BikeStatus status;
 		
-	@OneToMany( fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
+	@OneToMany( fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
 	private List<ImageModel> bikeImages;
 	
-	 
+	@ManyToOne(fetch=FetchType.EAGER, optional = false)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+	
 	 
 	public Bike() {
 	
 	}
 
-
-	public Bike(Integer id, BrandName brand, String modelName,
+	public Bike(Long id, BrandName brand, String modelName,
 			 Integer running, Date regDate, Integer noOfOwner,
 			 boolean insurance, Date iExpDate, Long price,
 			 Long contactNo, String contactName, String address,
@@ -217,22 +221,13 @@ public class Bike {
 		this.bLocation = bLocation;
 	}
 	
-
-
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
-
-	
-
-
 
 	public List<ImageModel> getBikeImages() {
 		return bikeImages;
@@ -248,11 +243,18 @@ public class Bike {
 		return status;
 	}
 
-
 	public void setStatus(BikeStatus status) {
 		this.status = status;
 	}
+	
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {
@@ -261,8 +263,5 @@ public class Bike {
 				+ iExpDate + ", price=" + price + ", contactNo=" + contactNo + ", contactName=" + contactName
 				+ ", address=" + address + ", bLocation=" + bLocation + ", status=" + status + "]";
 	}
-
-
-	
 
 }

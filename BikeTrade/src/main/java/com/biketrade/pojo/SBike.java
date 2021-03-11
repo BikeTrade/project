@@ -1,20 +1,94 @@
 package com.biketrade.pojo;
 
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
-@SolrDocument(collection = "bikedekho")
-public class SBike {
+import com.biketrade.model.Bike;
 
-	public SBike() {
+@SolrDocument(collection = "biketrade")
+public class SBike {
+	 @Id
+	 @Indexed(name = "id", type = "int")
+	 private Long id;
+	
+	 @Indexed(name = "brand", type = "string")
+	 private String brand;
+	
+	 @Indexed(name = "modelName", type = "string")
+	 private String modelName;
+	
+	 @Indexed(name = "running", type = "integer")
+	 private Integer running;
+	
+	 @Indexed(name = "regDate", type = "string")
+	 private String regDate;
+	
+	 @Indexed(name = "noOfOwner", type = "int")
+	 private Integer noOfOwner;
+	 
+	 @Indexed(name = "insurance", type = "boolean")
+	 private Boolean insurance; 
+ 
+    @Indexed(name = "iExpDate", type = "string")
+	private String iExpDate;
+	
+    @Indexed(name = "price", type = "long")
+	private Long price;
+	
+    @Indexed(name = "contactNo", type = "long")
+	private Long contactNo;
+	
+    @Indexed(name = "contactName", type = "string")
+	private String contactName;
+	
+    @Indexed(name = "address", type = "string")
+	private String address;
+	
+    @Indexed(name = "bLocation", type = "string")
+	private String bLocation;
+    
+    @Indexed(name="frontImg", type="string")
+    private String frontImg;
+    
+    @Indexed(name="backImg", type="string")
+    private String backImg;
+    
+    @Indexed(name="leftImg", type="string")
+    private String leftImg;
+    
+    @Indexed(name="rightImg", type="string")
+    private String rightImg;
+    
+    @Indexed(name="frontImgType", type="string")
+    private String frontImgType;
+    
+    @Indexed(name="backImgType", type="string")
+    private String backImgType;
+    
+    @Indexed(name="leftImgType", type="string")
+    private String leftImgType;
+    
+    @Indexed(name="rightImgType", type="string")
+    private String rightImgType;
+
+    //Constructor
+    public SBike() {
 		super();
 	}
-
-	public SBike(Long id, String brand, String modelName, Double running, String regDate, Integer noOfOwner,
-			Boolean insurance, String iExpDate, Double price, Long contactNo, String contactName, String address,
+    
+    public SBike(Long id) {
+	  this.id=id;
+	}
+ 
+    public SBike(Long id, String brand, String modelName, Integer running, String regDate, Integer noOfOwner,
+			Boolean insurance, String iExpDate, Long price, Long contactNo, String contactName, String address,
 			String bLocation) {
-		super();
 		this.id = id;
 		this.brand = brand;
 		this.modelName = modelName;
@@ -29,46 +103,49 @@ public class SBike {
 		this.address = address;
 		this.bLocation = bLocation;
 	}
-
-	@Id
-	 @Indexed(name = "id", type = "long")
-	 private Long id;
 	
-	 @Indexed(name = "brand", type = "string")
-	 private String brand;
+	String getFormattedDate(Date date){
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+	    return formatter.format(date);
+	}
 	
-	 @Indexed(name = "modelName", type = "string")
-	 private String modelName;
+	public SBike(Bike bike) {
+		this.id = bike.getId();
+		this.brand = bike.getBrand().toString();
+		this.modelName = bike.getModelName();
+		this.running = bike.getRunning();
+		this.regDate = getFormattedDate(bike.getRegDate());
+		this.noOfOwner = bike.getNoOfOwner();
+		this.insurance = bike.isInsurance();
+		this.iExpDate = getFormattedDate(bike.getiExpDate());
+		this.price = bike.getPrice();
+		this.contactNo = bike.getContactNo();
+		this.contactName = bike.getContactName();
+		this.address = bike.getAddress();
+		this.bLocation = bike.getbLocation();
+		
+        try {
+        	byte[] frontImg = Base64.encodeBase64(bike.getBikeImages().get(0).getPicByte());
+			this.frontImg=new String(frontImg, "UTF-8");
+			this.frontImgType = bike.getBikeImages().get(0).getType();
+			
+			byte[] backImg = Base64.encodeBase64(bike.getBikeImages().get(1).getPicByte());
+			this.backImg=new String(backImg, "UTF-8");
+			this.backImgType = bike.getBikeImages().get(1).getType();
+			
+			byte[] leftImg = Base64.encodeBase64(bike.getBikeImages().get(2).getPicByte());
+			this.leftImg=new String(leftImg, "UTF-8");
+			this.leftImgType = bike.getBikeImages().get(2).getType();
+			
+			byte[] rightImg = Base64.encodeBase64(bike.getBikeImages().get(3).getPicByte());
+			this.rightImg=new String(rightImg, "UTF-8");
+			this.rightImgType = bike.getBikeImages().get(3).getType();
+			
+		} catch (Exception  e) {			 
+			e.printStackTrace();
+		}
+	}
 	
-	 @Indexed(name = "running", type = "double")
-	 private Double running;
-	
-	 @Indexed(name = "regDate", type = "string")
-	 private String regDate;
-	
-	 @Indexed(name = "noOfOwner", type = "int")
-	 private Integer noOfOwner;
-	 
-	 @Indexed(name = "insurance", type = "boolean")
-	 private Boolean insurance; 
- 
-    @Indexed(name = "iExpDate", type = "string")
-	private String iExpDate;
-	
-    @Indexed(name = "price", type = "double")
-	private Double price;
-	
-    @Indexed(name = "contactNo", type = "long")
-	private Long contactNo;
-	
-    @Indexed(name = "contactName", type = "string")
-	private String contactName;
-	
-    @Indexed(name = "address", type = "string")
-	private String address;
-	
-    @Indexed(name = "bLocation", type = "string")
-	private String bLocation;
 
 	public Long getId() {
 		return id;
@@ -94,11 +171,11 @@ public class SBike {
 		this.modelName = modelName;
 	}
 
-	public Double getRunning() {
+ 	public Integer getRunning() {
 		return running;
 	}
 
-	public void setRunning(Double running) {
+	public void setRunning(Integer running) {
 		this.running = running;
 	}
 
@@ -134,11 +211,11 @@ public class SBike {
 		this.iExpDate = iExpDate;
 	}
 
-	public Double getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Long price) {
 		this.price = price;
 	}
 
@@ -173,4 +250,70 @@ public class SBike {
 	public void setbLocation(String bLocation) {
 		this.bLocation = bLocation;
 	}
+
+	public String getFrontImg() {
+		return frontImg;
+	}
+
+	public void setFrontImg(String frontImg) {
+		this.frontImg = frontImg;
+	}
+
+	public String getBackImg() {
+		return backImg;
+	}
+
+	public void setBackImg(String backImg) {
+		this.backImg = backImg;
+	}
+
+	public String getLeftImg() {
+		return leftImg;
+	}
+
+	public void setLeftImg(String leftImg) {
+		this.leftImg = leftImg;
+	}
+
+	public String getRightImg() {
+		return rightImg;
+	}
+
+	public void setRightImg(String rightImg) {
+		this.rightImg = rightImg;
+	}
+
+	public String getFrontImgType() {
+		return frontImgType;
+	}
+
+	public void setFrontImgType(String frontImgType) {
+		this.frontImgType = frontImgType;
+	}
+
+	public String getBackImgType() {
+		return backImgType;
+	}
+
+	public void setBackImgType(String backImgType) {
+		this.backImgType = backImgType;
+	}
+
+	public String getLeftImgType() {
+		return leftImgType;
+	}
+
+	public void setLeftImgType(String leftImgType) {
+		this.leftImgType = leftImgType;
+	}
+
+	public String getRightImgType() {
+		return rightImgType;
+	}
+
+	public void setRightImgType(String rightImgType) {
+		this.rightImgType = rightImgType;
+	}
+	
+	
 }

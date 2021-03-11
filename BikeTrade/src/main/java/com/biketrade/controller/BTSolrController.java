@@ -1,6 +1,8 @@
 package com.biketrade.controller;
 
  
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +17,7 @@ import com.biketrade.pojo.SBike;
 
 @RestController
 @RequestMapping("/bike")
-public class SolrController {
+public class BTSolrController {
     
 	@Autowired
 	BTSolrRepository btSolrRepository;
@@ -23,20 +25,9 @@ public class SolrController {
 	@Autowired
 	SolrTemplate solrTemplate;
 	
-    @GetMapping("/{filter}/{start}/{end}")
-    public Iterable<SBike> getBikes(@PathVariable String filter,@PathVariable Double start,@PathVariable Double end) {
-    	 
-        return btSolrRepository.getBikes(filter,start,end);
+    @GetMapping("/{filter}")
+    public List<SBike> getBikes(@PathVariable String filter) {    	 
+        return btSolrRepository.getBikes(filter);
     }
     
-    
-    @PostMapping("/save")
-    public SBike saveBike(@RequestBody SBike sbike) {  
-    	
-    	System.out.println(sbike);
-    	return btSolrRepository.save(sbike);    	
-    }
-    
-
- 
 }

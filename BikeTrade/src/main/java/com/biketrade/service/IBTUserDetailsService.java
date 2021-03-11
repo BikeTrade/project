@@ -13,5 +13,7 @@ public interface IBTUserDetailsService {
     public User findUserByUserName(String userName);
 
     public User saveUser(User user);
-
+    
+    public User getCurrentUser();
+    
 }

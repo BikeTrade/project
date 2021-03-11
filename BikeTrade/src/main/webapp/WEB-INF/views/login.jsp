@@ -1,44 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%--import spring suppiled JSP tag lib for URL rewriting --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="btag" tagdir="/WEB-INF/tags/" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
+<spring:url value="/css/loginstyle.css" var="login" />
+<link rel="stylesheet" type="text/css" href="${login}">
 <!DOCTYPE html>
-<%-- <html xmlns="http://www.w3.org/1999/xhtml">--%>
 <html>
 <head>
-	<meta charset="UTF-8">
-    <title>Spring Security Tutorial</title>
-    <link rel="stylesheet" type="text/css" href="/css/login.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<title>Home</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-<spring:url value="/registration"  var="regURL"/>
-<form action="${regURL}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-</form>
-
-<div class="container">
-<spring:url value="/login"   var="loginURL"/>
-    <img src="/images/login.jpg" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
-    <form action="${loginURL}" method="POST" class="form-signin">
-        <h3 class="form-signin-heading" >Welcome</h3>
-		        <font color="red"> ${message}</font>
-		      
-		 
-        <br/>
-    
-        <input type="text" id="user_name" name="user_name" placeholder="User Name"
-               class="form-control"/> <br/>
-        <input type="password" placeholder="Password"
-               id="password" name="password" class="form-control"/> <br/>
-               
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>
-    </form>
-    
-</div>
+<btag:header />
+	<div class="login-box">
+		<spring:url value="/login"  var="loginURL"/>
+        <form:form autocomplete="off"  action="${loginURL}" method="post" class="form-horizontal" >
+		<spring:url value="/images/avatar.png" var="avatar" />
+		<img src="${avatar}" alt="avtar">
+			<div class="form-input">
+				<i class="fa fa-user fa-2x cust" aria-hidden="true"></i>
+				<input type="text" placeholder="Enter Username" name="user_name" value=""><br/>
+				<i class="fa fa-unlock-alt fa-2x cust" aria-hidden="true"></i>
+				<input type="password" placeholder="Enter Password" name="password" value=""><br/>
+				<input type="submit" name="submit" value="LOGIN"><br/><br/>
+				<spring:url value="/registration" var="signup" />
+				<a href="${signup}">Sign Up</a>
+			</div>		
+		</form:form>
+	</div>	
 </body>
 </html>

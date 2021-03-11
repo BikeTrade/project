@@ -1,33 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%--import spring suppiled JSP tag lib for URL rewriting --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="btag" tagdir="/WEB-INF/tags/" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<spring:url value="/css/style.css" var="style" />
 <!DOCTYPE html>
 
 <html>
 <head>
 	<meta charset="UTF-8">
     <title>BikeRegistration Form</title>
-    <link rel="stylesheet" type="text/css" href="/css/registration.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+<btag:header />
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
         <spring:url value="/registrationbike"  var="bikeURL"/>
             <form:form autocomplete="off"  action="${bikeURL}" method="post" class="form-horizontal" role="form" modelAttribute="bikeform" enctype="multipart/form-data">
-                <h2>Registration Form</h2>
+                <h3>Bike Registration Form</h3>
 				<div class="form-group">
                     <div class="col-sm-9">
-                    
-                          <form:select path="brand"  class="form-control" >
-                              <form:option value="" label ="Select Brand"/>
-                              <form:options  items = "${requestScope.brand_names}" />
-                          </form:select>
+                    	<form>
+                          	<form:select path="brand" name="brand" class="form-control" >
+                            	<form:option value="" label ="Select Brand"/>
+                              	<form:options  items = "${requestScope.brand_names}" />
+                           	</form:select>
+                    	<class="form-control" /form>
                             <div class="has-error"><form:errors path="brand" class="text-danger" />
                             </div>   
                     </div>
@@ -51,7 +50,7 @@
 				
 				<div class="form-group">
                     <div class="col-sm-9">
-                          <form:input type="text" path="regDate" name="regDate" placeholder="Registration Date"
+                          <form:input type="date" path="regDate" name="regDate" placeholder="Registration Date"
                                class="form-control"/>
                             <div class="has-error"><form:errors path="regDate" class="text-danger"/></div>   
                     </div>
@@ -59,23 +58,27 @@
              
 				<div class="form-group">
                     <div class="col-sm-9">
-                          <form:input type="text" path="noOfOwner" name="noOfOwner" placeholder="OwnerShip"
+                          <form:input type="number" path="noOfOwner" name="noOfOwner" placeholder="OwnerShip"
                                class="form-control"/>
                             <div class="has-error"><form:errors path="noOfOwner" class="text-danger"/></div>   
                     </div>
                 </div>
 				
 				<div class="form-group">
-                    <div class="col-sm-9">
-                          <form:input type="text" path="insurance" name="insurance" placeholder="Insurance Status"
-                               class="form-control"/>
-                            <div class="has-error"><form:errors path="insurance" class="text-danger"/></div>   
+                    <div class="col-sm-9" class="radio-toolbar">
+                    	  <form >
+                    	  <input type="radio"name="insurance" id="true" value="true" checked>
+                    	  <label for="true">Insurance Yes</label>
+						  <input type="radio" name="insurance" id="false" value="false">
+						  <label for="false">Insurance No</label>
+						  <class="form-control" /form>
+                          <div class="has-error"><form:errors path="insurance" class="text-danger"/></div>   
                     </div>
                 </div>
 			
 				<div class="form-group">
                     <div class="col-sm-9">
-                          <form:input type="text" path="iExpDate" name="iExpDate" placeholder="Insurance Expire Date"
+                          <form:input type="date" path="iExpDate" name="iExpDate" placeholder="Insurance Expire Date"
                                class="form-control"/>
                             <div class="has-error"><form:errors path="iExpDate" class="text-danger"/></div>   
                     </div>
