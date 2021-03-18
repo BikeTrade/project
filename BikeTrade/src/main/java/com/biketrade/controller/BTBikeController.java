@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.math3.analysis.function.Add;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,6 +118,21 @@ public class BTBikeController {
 		modelAndView.addObject("message", "Successfully Cancelled Bike data with id " + bikeid);
 		modelAndView.setViewName("useraccount");
 		return modelAndView; 
+	}
+	
+	@ModelAttribute("cities")
+	public List<String> selectCity(){
+		List<String> cities = new ArrayList<String>();
+		cities.add("Mumbai");
+		cities.add("Pune");
+		cities.add("Satara");
+		cities.add("Bangalore");
+		cities.add("Dehli");
+		cities.add("Chennai");
+		cities.add("Ahmadabad");
+		cities.add("Chandigarh");
+		cities.add("Patana");
+		return cities;
 	}
 
 }

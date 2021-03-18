@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="btag" tagdir="/WEB-INF/tags/" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <spring:url value="/css/style.css" var="style" />
 <!DOCTYPE html>
@@ -27,8 +28,7 @@
                               	<form:options  items = "${requestScope.brand_names}" />
                            	</form:select>
                     	<class="form-control" /form>
-                            <div class="has-error"><form:errors path="brand" class="text-danger" />
-                            </div>   
+                            <div class="has-error"><form:errors path="brand" class="text-danger" /></div>   
                     </div>
                 </div>
 				
@@ -107,20 +107,26 @@
                             <div class="has-error"><form:errors path="contactName" class="text-danger"/></div>   
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-9">
+                    <form>
+                    	<form:select path="bLocation" name="blocation" class="form-control">
+                    		<form:option value="" label ="Select Bike Location"/>
+	                            <c:forEach items="${cities}" var="cities">
+	                            	<option value="${cities}">${cities}</option>
+	                            </c:forEach>
+                    	</form:select>
+                    	<class="form-control" /form>
+                            <div class="has-error"><form:errors path="bLocation" class="text-danger"/></div>  
+                    </div>
+                </div>
 				
 				<div class="form-group">
                     <div class="col-sm-9">
                           <form:input type="text" path="address" name="address" placeholder="Address"
                                class="form-control"/>
                             <div class="has-error"><form:errors path="address" class="text-danger"/></div>   
-                    </div>
-                </div>
-				
-				<div class="form-group">
-                    <div class="col-sm-9">
-                          <form:input type="text" path="bLocation" name="blocation" placeholder="Bike Location"
-                               class="form-control"/>
-                            <div class="has-error"><form:errors path="bLocation" class="text-danger"/></div>   
                     </div>
                 </div>
                 

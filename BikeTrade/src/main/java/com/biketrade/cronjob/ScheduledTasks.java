@@ -31,9 +31,9 @@ public class ScheduledTasks {
 	 @Autowired
 	 BTSolrRepository solrRepository;
 
-	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ScheduledTasks.class);
  
-	@Scheduled(fixedRate = 600000000)
+	@Scheduled(fixedRate = 6000000)
 	public void reportCurrentTime() {
 
 		 List<Bike> bikes= bikeDetailService.findByStatus(BikeStatus.APPROVED);
@@ -43,7 +43,7 @@ public class ScheduledTasks {
 		 solrRepository.saveAll(converted);
 		 }else
 		 {
-			 System.out.println("No approved bikes");
+			 LOG.info("No approved bikes");
 			 
 		 }
 		 

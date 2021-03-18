@@ -1,15 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib prefix="btag" tagdir="/WEB-INF/tags/" %>
     <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ page isELIgnored = "false" %>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>User Account</title>
-
+	<spring:url value="/css/adminstyle.css" var="style" />
+	<link rel="stylesheet" type="text/css" href="${style}">
 </head>
 <body>
 <btag:header />
@@ -70,9 +72,10 @@
 				   <div class="dropdown">
 					  <button class="dropbtn">Action</button>
 					  <div class="dropdown-content">
+						  
+						  <c:if test = "${bike.status != 'CANCELED'}">
 						  <spring:url value="/Edit?bikeid=${bike.id}" var="updateURL"/>
 						  <a href="${updateURL}">Edit</a>
-						  <c:if test = "${bike.status != 'CANCELED'}">
 					   	  <spring:url value="/bike/cancel?bikeid=${bike.id}"   var="cancelURL"/>
 					   	  <a href="${cancelURL}">cancel</a>
 					   	  </c:if>

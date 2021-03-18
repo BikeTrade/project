@@ -1,9 +1,9 @@
 package com.biketrade.pojo;
 
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
@@ -40,7 +40,13 @@ public class SBike {
 	
     @Indexed(name = "price", type = "long")
 	private Long price;
-	
+    
+    @Indexed(name = "kmRange", type = "string")
+  	private String kmRange;
+    
+    @Indexed(name = "priceRange", type = "string")
+  	private String priceRange;
+    
     @Indexed(name = "contactNo", type = "long")
 	private Long contactNo;
 	
@@ -128,22 +134,65 @@ public class SBike {
         	byte[] frontImg = Base64.encodeBase64(bike.getBikeImages().get(0).getPicByte());
 			this.frontImg=new String(frontImg, "UTF-8");
 			this.frontImgType = bike.getBikeImages().get(0).getType();
-			
+        	}
+        catch (Exception e) {
+				this.frontImg= StringUtils.EMPTY;
+				this.frontImgType = StringUtils.EMPTY;
+			}
+		
+		try {	
 			byte[] backImg = Base64.encodeBase64(bike.getBikeImages().get(1).getPicByte());
 			this.backImg=new String(backImg, "UTF-8");
 			this.backImgType = bike.getBikeImages().get(1).getType();
+			}
+		catch (Exception e) {
+			this.backImg= StringUtils.EMPTY;
+			this.backImgType = StringUtils.EMPTY;
+			}
 			
+		try {	
 			byte[] leftImg = Base64.encodeBase64(bike.getBikeImages().get(2).getPicByte());
 			this.leftImg=new String(leftImg, "UTF-8");
 			this.leftImgType = bike.getBikeImages().get(2).getType();
-			
+			}
+		catch (Exception e) {
+			this.leftImg= StringUtils.EMPTY;
+			this.leftImgType = StringUtils.EMPTY;
+			}
+		try {	
 			byte[] rightImg = Base64.encodeBase64(bike.getBikeImages().get(3).getPicByte());
 			this.rightImg=new String(rightImg, "UTF-8");
-			this.rightImgType = bike.getBikeImages().get(3).getType();
-			
-		} catch (Exception  e) {			 
-			e.printStackTrace();
-		}
+			this.rightImgType = bike.getBikeImages().get(3).getType();			
+			} 
+		catch (Exception  e) {			 
+			this.rightImg= StringUtils.EMPTY;
+			this.rightImgType = StringUtils.EMPTY;
+		}        
+        this.kmRange = getKmRangeFacet(running);
+        this.priceRange = getPriceRangeFacet(price);
+	}
+	
+	private String getPriceRangeFacet(Long price){
+		if(price <= 20000)
+			return "1_to_20000";
+		else if(price > 20000 && price <= 50000)
+			return "20000_to_50000";
+		else if(price > 50000 && price <= 75000)
+			return "50000_to_75000";
+		else
+			return "75000_more";
+	}
+	
+	
+	private String getKmRangeFacet(Integer running){
+		if(running <= 5000)
+			return "1_to_5000";
+		else if(running > 5000 && running <= 25000)
+			return "5000_to_25000";
+		else if(running > 25000 && running <= 50000)
+			return "25000_to_50000";
+		else
+			return "50000_more";
 	}
 	
 
@@ -315,5 +364,24 @@ public class SBike {
 		this.rightImgType = rightImgType;
 	}
 	
-	
+	public String getKmRange() {
+		return kmRange;
+	}
+
+	public void setKmRange(String kmRange) {
+		this.kmRange = kmRange;
+	}
+
+	public String getPriceRange() {
+		return priceRange;
+	}
+
+	public void setPriceRange(String priceRange) {
+		this.priceRange = priceRange;
+	}
+
+	@Override
+	public String toString() {
+		return "SBike [id=" + id + ", brand=" + brand + ", modelName=" + modelName + ", price=" + price + "]";
+	}	
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hamcrest.collection.IsEmptyCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.biketrade.dao.BTBikeRepository;
 import com.biketrade.model.Bike;
-import com.biketrade.model.BikeStatus;
 import com.biketrade.model.User;
 import com.biketrade.service.IBTBikeDetailsService;
 import com.biketrade.service.IBTUserDetailsService;
@@ -74,7 +71,7 @@ public class BTUserController {
 
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
-			modelAndView.setViewName("userregistration");
+			modelAndView.setViewName("login");
 		}
 		return modelAndView;
 	}

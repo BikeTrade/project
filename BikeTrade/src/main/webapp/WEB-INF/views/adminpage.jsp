@@ -3,7 +3,9 @@
     <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ page isELIgnored = "false" %>
-
+	
+	<spring:url value="/css/adminstyle.css" var="style" />
+	<link rel="stylesheet" type="text/css" href="${style}">
 <!DOCTYPE html>
 <html>
 <head>

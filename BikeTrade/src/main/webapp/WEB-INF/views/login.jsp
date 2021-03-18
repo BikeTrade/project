@@ -26,7 +26,7 @@
 				<input type="password" placeholder="Enter Password" name="password" value=""><br/>
 				<input type="submit" name="submit" value="LOGIN"><br/><br/>
 				<spring:url value="/registration" var="signup" />
-				<a href="${signup}">Sign Up</a>
+				<h4><a href="${signup}">Click Here For New User Registration</a></h4>
 			</div>		
 		</form:form>
 	</div>	
