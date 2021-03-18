@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.commons.math3.analysis.function.Add;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +20,13 @@ import com.biketrade.dao.BTSolrRepository;
 import com.biketrade.dao.ImageRepository;
 import com.biketrade.form.BikeForm;
 import com.biketrade.model.Bike;
+import com.biketrade.model.BikeState;
 import com.biketrade.model.BikeStatus;
 import com.biketrade.model.BrandName;
 import com.biketrade.model.ImageModel;
-import com.biketrade.model.Role;
 import com.biketrade.model.User;
 import com.biketrade.service.IBTBikeDetailsService;
 import com.biketrade.service.IBTUserDetailsService;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 public class BTBikeController {
@@ -82,6 +78,7 @@ public class BTBikeController {
 		savebike.setRunning(bikeform.getRunning());
 		savebike.setInsurance(true);
 		savebike.setStatus(BikeStatus.NOTAPPROVED);
+		savebike.setState(BikeState.UNSOLD);
 		savebike.setUser(user);
 		
 		ImageModel leftImage = new ImageModel(bikeform.getLeftImage().getName(),
@@ -113,7 +110,7 @@ public class BTBikeController {
 	
 	@RequestMapping(value = "/bike/cancel", method = RequestMethod.GET)
 	public ModelAndView cancelBike(ModelAndView modelAndView, @RequestParam Long bikeid) {
-		bikeService.updateBike(bikeid, BikeStatus.CANCELED);
+		bikeService.updateBike(bikeid, BikeStatus.CANCELLED);
 		solarRepository.deleteById(bikeid);
 		modelAndView.addObject("message", "Successfully Cancelled Bike data with id " + bikeid);
 		modelAndView.setViewName("useraccount");

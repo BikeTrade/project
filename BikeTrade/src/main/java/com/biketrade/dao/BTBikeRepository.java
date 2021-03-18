@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.biketrade.model.Bike;
+import com.biketrade.model.BikeState;
 import com.biketrade.model.BikeStatus;
 import com.biketrade.model.User;
 
@@ -22,4 +23,19 @@ public interface BTBikeRepository  extends JpaRepository<Bike, Integer>{
 	public List<Bike> findByStatus(BikeStatus status);
 	
 	public List<Bike> findByUser(User user);
+	
+
+	//to show on useraccount
+	public List<Bike> findById(long bikeid);
+	
+	//to edit/update bikedetails
+	public Bike findAllById(long bikeid);
+	
+	//get all count
+	public long count();
+	
+	
+	public int countByStatus(BikeStatus status);
+	
+	public int countByState(BikeState state);
 }

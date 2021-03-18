@@ -24,7 +24,8 @@
 				<input type="text" placeholder="Enter Username" name="user_name" value=""><br/>
 				<i class="fa fa-unlock-alt fa-2x cust" aria-hidden="true"></i>
 				<input type="password" placeholder="Enter Password" name="password" value=""><br/>
-				<input type="submit" name="submit" value="LOGIN"><br/><br/>
+				<input type="submit" name="submit" value="LOGIN"><br/>
+				<font color="red"> ${message}</font><br />
 				<spring:url value="/registration" var="signup" />
 				<h4><a href="${signup}">Click Here For New User Registration</a></h4>
 			</div>		

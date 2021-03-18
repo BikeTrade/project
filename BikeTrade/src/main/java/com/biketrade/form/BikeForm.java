@@ -2,8 +2,12 @@ package com.biketrade.form;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,10 +15,16 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.biketrade.model.BikeState;
 import com.biketrade.model.BikeStatus;
 import com.biketrade.model.BrandName;
 
 public class BikeForm {
+	
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 	
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "*Please Select Brand Name")
@@ -57,6 +67,9 @@ public class BikeForm {
 	@Enumerated(EnumType.STRING)
 	private BikeStatus status;
 
+	@Enumerated(EnumType.STRING)
+	private BikeState state;
+	
 	private MultipartFile leftImage;
 	private MultipartFile rightImage;
 	private MultipartFile frontImage;
@@ -66,10 +79,11 @@ public class BikeForm {
 		super();
 	}
 
-	public BikeForm(BrandName brand, String modelName, Integer running, Date regDate, Integer noOfOwner, boolean insurance,
+	public BikeForm(Long id,BrandName brand, String modelName, Integer running, Date regDate, Integer noOfOwner, boolean insurance,
 			Date iExpDate, Long price, Long contactNo, String contactName, String address, String bLocation,
 			MultipartFile leftImage, MultipartFile rightImage, MultipartFile frontImage, MultipartFile backImage) {
 		super();
+		this.id=id;
 		this.brand = brand;
 		this.modelName = modelName;
 		this.running = running;
@@ -88,6 +102,14 @@ public class BikeForm {
 		this.backImage = backImage;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public void setBrand( BrandName brand) {
 		this.brand = brand;
 	}
@@ -222,6 +244,14 @@ public class BikeForm {
 
 	public void setStatus(BikeStatus status) {
 		this.status = status;
+	}
+	
+	public BikeState getState() {
+		return state;
+	}
+
+	public void setState(BikeState state) {
+		this.state = state;
 	}
 
 	@Override

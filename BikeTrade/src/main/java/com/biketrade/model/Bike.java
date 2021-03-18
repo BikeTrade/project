@@ -40,7 +40,6 @@ public class Bike {
     @Column(name = "bike_id")
     private Long id;
 	
-	
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "*Please Select Brand Name")
 	private BrandName brand;
@@ -52,6 +51,7 @@ public class Bike {
 	@Column(name = "km_driven")
 	@NotNull(message = "*Please provid the value" )
 	private Integer running;
+	 
 	
 	@Column(name = "reg_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -92,6 +92,10 @@ public class Bike {
 
 	@Enumerated(EnumType.STRING)
 	private BikeStatus status;
+	
+
+	@Enumerated(EnumType.STRING)
+	private BikeState state;
 		
 	@OneToMany( fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
 	private List<ImageModel> bikeImages;
@@ -255,13 +259,25 @@ public class Bike {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
+	public BikeState getState() {
+		return state;
+	}
+
+
+	public void setState(BikeState state) {
+		this.state = state;
+	}
 
 	@Override
 	public String toString() {
 		return "Bike [id=" + id + ", brand=" + brand + ", modelName=" + modelName + ", running=" + running
 				+ ", regDate=" + regDate + ", noOfOwner=" + noOfOwner + ", insurance=" + insurance + ", iExpDate="
 				+ iExpDate + ", price=" + price + ", contactNo=" + contactNo + ", contactName=" + contactName
-				+ ", address=" + address + ", bLocation=" + bLocation + ", status=" + status + "]";
+				+ ", address=" + address + ", bLocation=" + bLocation + ", status=" + status + ", state=" +state +  "]";
 	}
+
+
 
 }

@@ -20,6 +20,7 @@
         <spring:url value="/registrationbike"  var="bikeURL"/>
             <form:form autocomplete="off"  action="${bikeURL}" method="post" class="form-horizontal" role="form" modelAttribute="bikeform" enctype="multipart/form-data">
                 <h3>Bike Registration Form</h3>
+                  <h2><span class="text-success">${successMessageB}</span></h2>
 				<div class="form-group">
                     <div class="col-sm-9">
                     	<form>
@@ -171,7 +172,7 @@
                     </div>
                 </div>
                 
-                <h2><span class="text-success">${successMessageB}</span></h2>
+              
             </form:form>
           </div>
        </div>

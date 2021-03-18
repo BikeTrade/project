@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.biketrade.dao.BTBikeRepository;
 import com.biketrade.model.Bike;
+import com.biketrade.model.BikeState;
 import com.biketrade.model.BikeStatus;
 import com.biketrade.model.User;
 
@@ -41,4 +42,39 @@ public class BTBikeDetailsServiceImpl implements IBTBikeDetailsService {
 		return bikeRepository.findByUser(user);
 	}
 
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return bikeRepository.count();
+	}
+
+
+	@Override
+	public int countByStatus(BikeStatus status) {
+		
+		return bikeRepository.countByStatus(status);
+	}
+
+
+	@Override
+	public int countByState(BikeState state) {
+		
+		return bikeRepository.countByState(state);
+	}
+
+	@Override
+	public List<Bike> findById(long bikeid) {
+		
+		return bikeRepository.findById(bikeid);
+	}
+
+	@Override
+	public Bike findAllById(long bikeid) {
+		// TODO Auto-generated method stub
+		return bikeRepository.findAllById(bikeid);
+	}
+	
+	
+	
+	
 }
