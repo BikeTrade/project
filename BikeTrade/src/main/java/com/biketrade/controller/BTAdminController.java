@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.biketrade.model.Bike;
 import com.biketrade.model.BikeState;
 import com.biketrade.model.BikeStatus;
+import com.biketrade.model.BrandName;
 import com.biketrade.service.IBTBikeDetailsService;
 
 @Controller
@@ -52,7 +53,6 @@ public class BTAdminController {
 		return modelAndView;
 	}
 	
-	
 	private void showBikeDetails(ModelAndView modelAndView) {
 		List<Bike> lists = bikeService.findByStatus(BikeStatus.NOTAPPROVED);
 		if (lists != null) {
@@ -72,12 +72,33 @@ public class BTAdminController {
 		modelAndView.addObject("cancelledcount" ,bikeService.countByStatus(BikeStatus.CANCELLED));
 		modelAndView.addObject("soldcount" ,bikeService.countByState(BikeState.SOLD));
 		modelAndView.addObject("unsoldcount" ,bikeService.countByState(BikeState.UNSOLD));
+		
+		modelAndView.addObject("hero",bikeService.countByBrandAndStateAndStatus(BrandName.HERO, BikeState.SOLD,BikeStatus.APPROVED));
+		modelAndView.addObject("tvs",bikeService.countByBrandAndStateAndStatus(BrandName.TVS, BikeState.SOLD,BikeStatus.APPROVED));
+		modelAndView.addObject("honda",bikeService.countByBrandAndStateAndStatus(BrandName.HONDA, BikeState.SOLD,BikeStatus.APPROVED));
+		modelAndView.addObject("yamaha",bikeService.countByBrandAndStateAndStatus(BrandName.YAMAHA, BikeState.SOLD,BikeStatus.APPROVED));
+		modelAndView.addObject("suzuki",bikeService.countByBrandAndStateAndStatus(BrandName.SUZUKI, BikeState.SOLD,BikeStatus.APPROVED));
+		
+		
+		modelAndView.addObject("Jan" , bikeService.countByStateAndSoldDate(BikeState.SOLD ,"January"));
+		
+		modelAndView.addObject("Feb" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"February"));
+		modelAndView.addObject("Mar" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"March"));
+		modelAndView.addObject("Apr" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"April"));
+		modelAndView.addObject("May" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"May"));
+		modelAndView.addObject("Jun" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"June"));
+		modelAndView.addObject("Jul" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"July"));
+		modelAndView.addObject("Aug" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"August"));
+		modelAndView.addObject("Sep" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"September"));
+		modelAndView.addObject("Oct" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"October"));
+		modelAndView.addObject("Nov" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"November"));
+		modelAndView.addObject("Dec" ,bikeService.countByStateAndSoldDate(BikeState.SOLD ,"December"));
+		
+		
+		
 		modelAndView.setViewName("AdminDashboard");
 		
 		
 		return modelAndView;
 	}
-	
-	
-	
 }

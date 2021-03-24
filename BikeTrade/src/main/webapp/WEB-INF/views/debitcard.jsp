@@ -39,6 +39,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+
+
 	<script>$(function($) {
         $('[data-numeric]').payment('restrictNumeric');
         $('.cc-number').payment('formatCardNumber');
@@ -66,6 +68,9 @@
 		<div class="well well-sm text-center">
 			<h1>Make Payment</h1>
 		</div>
+		<p>
+
+</p>
     <div class="padding">
         <div class="row">
             <div class="container-fluid d-flex justify-content-center">
@@ -79,7 +84,7 @@
                         </div>
                         
                         <spring:url value="/debit" var="debitURL" />
-				<form:form autocomplete="off" action="${debitURL}" method="post"  modelAttribute="payment">
+				<form:form autocomplete="off" action="${debitURL}" method="post"  modelAttribute="payment" name="form">
                         <div class="card-body" style="height: 350px">
                             <div class="form-group"> <label for="cc-number" class="control-label">CARD NUMBER</label> 
                             <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required> </div>
@@ -90,17 +95,22 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group"> <label for="cc-cvc" class="control-label">CARD CVC</label> 
-                                    <input id="cc-cvc" type="tel" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="••••" required> </div>
+                                    <input id="cc-cvc" type="tel" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="•••" required> </div>
                                 </div>
+                                
+                                
                                   <form:input type="hidden" class="form-control" value="DEBIT_CARD"
-						path="mode" />
+						path="mode" name="paymentMode"/>
 
 					<form:input type="hidden" class="form-control" value="000"
-						path="amount" />
+						path="amount" name="amount"/>
+						
                             </div>
                             <div class="form-group"> <label  class="control-label">CARD HOLDER NAME</label>
-                             <form:input type="text" path="payeeName" class="input-lg form-control"/> </div>
-                            <div class="form-group"> <input value="MAKE PAYMENT" type="submit" class="btn btn-success btn-lg form-control" style="font-size: .8rem;"> </div>
+                             <form:input type="text" path="payeeName" class="input-lg form-control" name ="payeeName"/> </div>
+                           
+                            <div class="form-group">
+                             <input value="MAKE PAYMENT" type="submit" class="btn btn-success btn-lg form-control" style="font-size: .8rem;"> </div>
                         </div>
                       
                         </form:form>
@@ -110,5 +120,6 @@
         </div>
     </div>
     </div>
+    <btag:footer />
 </body>
 </html>

@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="btag" tagdir="/WEB-INF/tags/"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,11 +25,11 @@
 			
 			type: "column",
 			dataPoints: [
-				{ label: "Honda",  y: 10  },
-				{ label: "Suzuki", y: 15  },
-				{ label: "Yamaha", y: 25  },
-				{ label: "Bajaj",  y: 30  },
-				{ label: "TVS",  y: 28  }
+				{ label: "Hero",  y: ${hero}  },
+				{ label: "Suzuki", y: ${suzuki}  },
+				{ label: "Yamaha", y: ${yamaha}  },
+				{ label: "Honda",  y: ${honda}  },
+				{ label: "TVS",  y: ${tvs}  }
 			]
 		}
 		]
@@ -45,11 +51,12 @@
 			//showInLegend: true,
 			legendText: "{indexLabel}",
 			dataPoints: [
-				{ y: 10, indexLabel: "Honda" },
-				{ y: 15, indexLabel: "Suzuki" },
-				{ y: 25, indexLabel: "Yamaha" },
-				{ y: 30, indexLabel: "Bajaj"},
-				{ y: 28, indexLabel: "TVS" },
+				{ y: ${hero}, indexLabel: "Hero" },
+				{ y: ${suzuki}, indexLabel: "Suzuki" },
+				
+				{ y: ${honda}, indexLabel: "Honda" },
+				{ y: ${yamaha}, indexLabel: "Yamaha"},
+				{ y: ${tvs}, indexLabel: "TVS" },
 				
 			]
 		}
@@ -76,18 +83,18 @@
         type: "line",
 
         dataPoints: [
-        { x: new Date(2012, 00, 1), y: 450 },
-        { x: new Date(2012, 01, 1), y: 414},
-          { x: new Date(2012, 02, 1), y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle"},
-        { x: new Date(2012, 03, 1), y: 460 },
-        { x: new Date(2012, 04, 1), y: 450 },
-        { x: new Date(2012, 05, 1), y: 500 },
-        { x: new Date(2012, 06, 1), y: 480 },
-        { x: new Date(2012, 07, 1), y: 480 },
-        { x: new Date(2012, 08, 1), y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross"},
-        { x: new Date(2012, 09, 1), y: 500 },
-        { x: new Date(2012, 10, 1), y: 480 },
-        { x: new Date(2012, 11, 1), y: 510 }
+        { x: new Date(2012, 00, 1), y: ${Jan}  },
+        { x: new Date(2012, 01, 1), y: ${Feb}  },
+          { x: new Date(2012, 02, 1), y:${Mar} },
+        { x: new Date(2012, 03, 1), y: ${Apr}  },
+        { x: new Date(2012, 04, 1), y: ${May}  },
+        { x: new Date(2012, 05, 1), y: ${Jun}  },
+        { x: new Date(2012, 06, 1), y: ${Jul}  },
+        { x: new Date(2012, 07, 1), y: ${Aug}  },
+        { x: new Date(2012, 08, 1), y: ${Sep}  },
+        { x: new Date(2012, 09, 1), y: ${Oct}  },
+        { x: new Date(2012, 10, 1), y: ${Nov}  },
+        { x: new Date(2012, 11, 1), y: ${Dec}  }
         ]
 		
 		
@@ -117,8 +124,7 @@
 				{ y: ${cancelledcount}, indexLabel: "Cancelled"},
 				{ y: ${soldcount}, indexLabel: "SOLD" },
 				{ y: ${unsoldcount}, indexLabel: "UNSOLD" },
-				
-				
+			
 			]
 		}
 		]
@@ -129,12 +135,7 @@
 	chart2.render();
 	chart3.render();
 }
-  
-  
-
-  
-  
-  
+ 
   </script>
 
 
@@ -161,43 +162,19 @@
 		height: auto;
 	}
 }
+
 </style>
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse visible-xs">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Logo</a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Name : XYZ</a></li>
-					<li><a href="#">Role : Admin</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	
 
-	<div class="container-fluid">
+	<div class="container-fluid ">
 		<div class="row content">
-			<div class="col-sm-3 sidenav hidden-xs">
-
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#section1">Name : XYZ</a></li>
-					<li><a href="#section2">Role : Admin</a></li>
-
-				</ul>
-				<br>
-			</div>
+			
 			<br>
 
-			<div class="col-sm-9">
+			<div >
 				<div class="well">
 					<h3>Admin Dashboard</h3>
 					<h4>Bikes Sell Report</h4>
@@ -248,8 +225,9 @@
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
+
+
 
 </body>
+
 </html>

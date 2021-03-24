@@ -12,7 +12,6 @@ import com.biketrade.model.Payment;
 import com.biketrade.service.BTPaymentService;
 
 @Controller
-
 public class BTPaymentController {
 
 	@Autowired
@@ -22,14 +21,10 @@ public class BTPaymentController {
 	public ModelAndView payment(ModelAndView mv, @RequestParam("paymentmode") String mode) {
 
 		if (mode.equals("1")) {
-//			//get method for set view at payment.jsp
-//			@RequestMapping(value ="/debit" , method = RequestMethod.GET)
-//			public ModelAndView debit () {
-//				ModelAndView mv = new ModelAndView();
+		
 			mv.addObject("payment", new Payment());
 			mv.setViewName("debitcard");
-			// return mv;
-			// }
+			
 		} else if(mode.equals("2")) {
 			mv.addObject("payment", new Payment());
 			mv.setViewName("netbanking");
@@ -41,41 +36,40 @@ public class BTPaymentController {
 		return mv;
 	}
 
-	// get method for set view at payment.jsp
-//	@RequestMapping(value ="/netbank" , method = RequestMethod.GET)
-//	public ModelAndView netbank () {
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("payment" , new Payment());
-//		mv.setViewName("netbanking");
-//		return mv;
-//	}
-
 	@RequestMapping(value = "/netbank", method = RequestMethod.POST)
 	public ModelAndView netbank(Payment payment, BindingResult bindingResult) {
 		ModelAndView mv = new ModelAndView();
 		if (bindingResult.hasErrors());
 		{
-			
 			mv.setViewName("netbanking");
 		}
 		payService.savePayment(payment);
+		mv.addObject("transaction",payment.getId());
+		mv.addObject("amount",payment.getAmount());
+		mv.addObject("payeeName",payment.getPayeeName());
+		mv.addObject("paymode",payment.getMode());
 		mv.addObject("paid", "Transaction Succesfull");
 		mv.addObject("payment", new Payment());
-		mv.setViewName("netbanking");
+		mv.setViewName("receipt");
 		return mv;
 	}
 
 	@RequestMapping(value = "/debit", method = RequestMethod.POST)
 	public ModelAndView cardPay(Payment payment, BindingResult bindingResult) {
 		ModelAndView mv = new ModelAndView();
+	
 		if (bindingResult.hasErrors());
 		{
 			mv.setViewName("debitcard");
 		}
 		payService.savePayment(payment);
+		mv.addObject("transaction",payment.getId());
+		mv.addObject("amount",payment.getAmount());
+		mv.addObject("payeeName",payment.getPayeeName());
+		mv.addObject("paymode",payment.getMode());
 		mv.addObject("paid", "Transaction Succesfull");
 		mv.addObject("payment", new Payment());
-		mv.setViewName("debitcard");
+		mv.setViewName("receipt");
 		return mv;
 	}
 	@RequestMapping(value = "/upi", method = RequestMethod.POST)
@@ -84,11 +78,15 @@ public class BTPaymentController {
 		if (bindingResult.hasErrors());
 		{
 			mv.setViewName("debitcard");
-		}
+	}
 		payService.savePayment(payment);
+		mv.addObject("transaction",payment.getId());
+		mv.addObject("amount",payment.getAmount());
+		mv.addObject("payeeName",payment.getPayeeName());
+		mv.addObject("paymode",payment.getMode());
 		mv.addObject("paid", "Transaction Succesfull");
 		mv.addObject("payment", new Payment());
-		mv.setViewName("upi");
+		mv.setViewName("receipt");
 		return mv;
 	}
 	

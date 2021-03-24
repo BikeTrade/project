@@ -42,9 +42,6 @@
 	$(function($) {
         $('[data-numeric]').payment('restrictNumeric');
        
-       
-       
-        
         $.fn.toggleInputError = function(erred) {
         this.parent('.form-group');
         return this;
@@ -89,17 +86,17 @@
 						path="amount" />
                             </div>
                             <div class="form-group"> <label  class="control-label"> NAME</label>
-                             <form:input type="text" path="payeeName" class="input-lg form-control" /> </div>
+                             <form:input type="text" path="payeeName" class="input-lg form-control" placeholder="Enter Name" /> </div>
                              
                                <div class="form-group"> <label  class="control-label"> IFSC Code</label>
-                             <input type="text"  class="input-lg form-control" required/> </div>
+                             <input type="text"  class="input-lg form-control" placeholder="Enter IFSC Code" required/> </div>
                              
                                <div class="form-group"> <label  class="control-label"> Bank Name</label>
-                             <input type="text"  class="input-lg form-control" required/> </div>
+                             <input type="text"  class="input-lg form-control" placeholder="Enter Bank Name" required/> </div>
                              
                                <div class="form-group"> <label  class="control-label"> Branch</label>
-                             <input type="text"  class="input-lg form-control" required/> </div>
-                            <div class="form-group"> <input value="MAKE PAYMENT" type="submit" class="btn btn-success btn-lg form-control" style="font-size: .8rem;"> </div>
+                             <input type="text"  class="input-lg form-control"  placeholder="Enter Branch Name" required/> </div>
+                            <div class="form-group"> <input value="MAKE PAYMENT" type="submit" class="btn btn-success btn-lg form-control" style="font-size: .8rem;"><br/><br/> </div>
                         </div>
                       
                         </form:form>
@@ -109,5 +106,6 @@
         </div>
     </div>
     </div>
+    <btag:footer />
 </body>
 </html>

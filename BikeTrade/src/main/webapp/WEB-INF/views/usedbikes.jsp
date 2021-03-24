@@ -20,5 +20,6 @@
 	<spring:url value="/js/App.js"  var="app" />
     <script type="text/babel"   src="${app} ">
     </script>
+    <btag:footer />
   </body>
 </html>

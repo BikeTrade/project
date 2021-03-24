@@ -12,11 +12,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BikeRegistration Form</title>
+<title>Bike Edit Form</title>
 
 </head>
 <body>
 	<btag:header />
+	<br/><br/><br/>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -31,7 +32,7 @@
 
 
 
-						<h3>Bike Registration Form</h3>
+						<h3>Bike Edit Form</h3>
 
 
 						<div class="form-group">
@@ -233,6 +234,7 @@
 				</h2>
 			</div>
 		</div>
-	</div>
+	</div><br/><br/><br/>
+	<btag:footer />
 </body>
 </html>

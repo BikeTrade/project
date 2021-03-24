@@ -38,27 +38,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-	<script>
-	$(function($) {
-        $('[data-numeric]').payment('restrictNumeric');
-       
-       
-       
-        
-        $.fn.toggleInputError = function(erred) {
-        this.parent('.form-group');
-        return this;
-        };
-        $('form').submit(function(e) {
-     
-        var cardType = $.payment.cardType($('.cc-number').val());
-       
-     
-        $('.cc-brand').text(cardType);
-        $('.validation').removeClass('text-danger text-success');
-        $('.validation').addClass($('.has-error').length ? 'text-danger' : 'text-success');
-        });
-        });</script>
+	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/3.0.0/jquery.payment.min.js"></script>
  <br> <div class="container">
 		<div class="well well-sm text-center">
@@ -70,15 +50,15 @@
     <div class="padding">
         <div class="row">
             <div class="container-fluid d-flex justify-content-center">
-                <div class="col-sm-8 col-md-6">
-                    <div class="card">
+                <div class="col-sm-8 col-md-6 ">
+                    <div class="card " >
                 
                         
                         <spring:url value="/upi" var="upiURL" />
 				<form:form autocomplete="off" action="${upiURL}" method="post"  modelAttribute="payment">
                         <div class="card-body" style="height: 350px">
                             <div class="form-group"> <label for="cc-number" class="control-label">UPI Number</label> 
-                            <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="Enter Account Number" required> </div>
+                            <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="Enter UPI Number" required> </div>
                             <div class="row">
                                 
                                 
@@ -89,7 +69,7 @@
 						path="amount" />
                             </div>
                             <div class="form-group"> <label  class="control-label"> NAME</label>
-                             <form:input type="text" path="payeeName" class="input-lg form-control" /> </div>
+                             <form:input type="text" path="payeeName" class="input-lg form-control"  placeholder="Enter Name"/> </div>
                              
                            
                             <div class="form-group"> <input value="MAKE PAYMENT" type="submit" class="btn btn-success btn-lg form-control" style="font-size: .8rem;"> </div>
@@ -103,4 +83,4 @@
     </div>
     </div>
 </body>
-</html>ml>
+</html>

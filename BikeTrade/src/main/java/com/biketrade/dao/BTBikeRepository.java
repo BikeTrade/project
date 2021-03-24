@@ -1,5 +1,6 @@
 package com.biketrade.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,10 +12,11 @@ import org.springframework.stereotype.Repository;
 import com.biketrade.model.Bike;
 import com.biketrade.model.BikeState;
 import com.biketrade.model.BikeStatus;
+import com.biketrade.model.BrandName;
 import com.biketrade.model.User;
 
 @Repository
-public interface BTBikeRepository  extends JpaRepository<Bike, Integer>{
+public interface BTBikeRepository extends JpaRepository<Bike, Integer>{
 	
 	@Modifying
 	@Query("update Bike b set b.status = :status where b.id = :bid")
@@ -38,4 +40,10 @@ public interface BTBikeRepository  extends JpaRepository<Bike, Integer>{
 	public int countByStatus(BikeStatus status);
 	
 	public int countByState(BikeState state);
+	
+	public int countByBrandAndStateAndStatus(BrandName brand,BikeState state,BikeStatus status);
+	
+	
+	@Query("select count(*) from Bike b where monthname(b.soldDate)=:soldDate and b.state= :state")
+	public int countByStateAndSoldDate(@Param(value = "state") BikeState state,@Param(value = "soldDate") String soldDate);
 }

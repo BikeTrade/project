@@ -1,23 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	<%@ taglib prefix="btag" tagdir="/WEB-INF/tags/" %>
-    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%@ page isELIgnored = "false" %>
-	
-	<spring:url value="/css/adminstyle.css" var="style" />
-	<link rel="stylesheet" type="text/css" href="${style}">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="btag" tagdir="/WEB-INF/tags/"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Admin Page</title>
- 
+<spring:url value="/css/adminstyle.css" var="style" />
+<link rel="stylesheet" type="text/css" href="${style}">
+ <link rel="stylesheet" type="text/css" href="/css/registration.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+.dropbtn {
+  background-color: #1E90FF;
+  color: white;
+  padding: 13px;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+background-color: #1E90FF;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+#content-wrap {
+  padding-bottom: 5.5rem;    /* Footer height */
+}
+</style>
+
 </head>
 
 
 <body>
 	<btag:header />
-
+ <div id="content-wrap">
 
 	<c:choose>
 		<c:when test="${empty NA_list}">
@@ -79,18 +131,30 @@
 		</c:otherwise>
 	</c:choose>
 
+
+
+
 	<a href="<spring:url value='/getcount'/>">Summerise </a>
-	 <spring:url value="/payment" var="debitURL" />
-			
-			
-			
-			
-			
-				<form autocomplete="off" action="${debitURL}" >
-	<input type="radio" name="paymentmode" value="1"/>debitr
-<input type="radio" NAME="paymentmode" VALUE="2"/>netbankr
-<input type="radio" NAME="paymentmode" VALUE="3"/>upi
-<input type="submit" value="pay radio"/>
-</form>
+
+
+
+
+
+
+
+	<spring:url value="/payment" var="debitURL" />
+
+	<form autocomplete="off" action="${debitURL}">
+		<input type="radio" name="paymentmode" value="1" />debitr
+		 <input type="radio" NAME="paymentmode" VALUE="2" />netbankr
+			 <input	type="radio" NAME="paymentmode" VALUE="3" />upi 
+			 <input type="submit" value="pay radio" />
+	</form>
+
+
+
+
+</div>
+	<btag:footer />
 </body>
 </html>

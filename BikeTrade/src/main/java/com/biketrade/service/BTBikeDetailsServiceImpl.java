@@ -1,5 +1,6 @@
 package com.biketrade.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,6 +12,7 @@ import com.biketrade.dao.BTBikeRepository;
 import com.biketrade.model.Bike;
 import com.biketrade.model.BikeState;
 import com.biketrade.model.BikeStatus;
+import com.biketrade.model.BrandName;
 import com.biketrade.model.User;
 
 @Service
@@ -72,6 +74,18 @@ public class BTBikeDetailsServiceImpl implements IBTBikeDetailsService {
 	public Bike findAllById(long bikeid) {
 		// TODO Auto-generated method stub
 		return bikeRepository.findAllById(bikeid);
+	}
+
+	@Override
+	public int countByBrandAndStateAndStatus(BrandName brand, BikeState state , BikeStatus status) {
+		// TODO Auto-generated method stub
+		return bikeRepository.countByBrandAndStateAndStatus(brand, state,status);
+	}
+
+	@Override
+	public int countByStateAndSoldDate(BikeState state, String soldDate) {
+		
+		return bikeRepository.countByStateAndSoldDate(state, soldDate);
 	}
 	
 	

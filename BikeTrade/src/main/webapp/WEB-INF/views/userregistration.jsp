@@ -12,6 +12,7 @@
 </head>
 <body>
 <btag:header />
+ 
 </form>
 <div class="container">
     <div class="row">
@@ -74,11 +75,13 @@
                 </div>
 
                 <h2><span class="text-success">${successMessage}</span></h2>
-
             </form:form>
+           
         </div>
     </div>
+    
 </div>
-
+<btag:footer />
 </body>
+
 </html>

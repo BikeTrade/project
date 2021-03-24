@@ -97,6 +97,11 @@ public class Bike {
 	@Enumerated(EnumType.STRING)
 	private BikeState state;
 		
+	@Column(name = "sold_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date soldDate;
+	
+	
 	@OneToMany( fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
 	private List<ImageModel> bikeImages;
 	
@@ -105,6 +110,8 @@ public class Bike {
 	private User user;
 	
 	 
+	
+	
 	public Bike() {
 	
 	}
@@ -113,7 +120,7 @@ public class Bike {
 			 Integer running, Date regDate, Integer noOfOwner,
 			 boolean insurance, Date iExpDate, Long price,
 			 Long contactNo, String contactName, String address,
-			 String bLocation) {
+			 String bLocation,Date soldDate) {
 		super();
 		this.id = id;
 		this.brand = brand;
@@ -128,6 +135,7 @@ public class Bike {
 		this.contactName = contactName;
 		this.address = address;
 		this.bLocation = bLocation;
+		this.soldDate=soldDate;
 		
 	}
 
@@ -270,12 +278,22 @@ public class Bike {
 		this.state = state;
 	}
 
+	
+	
+	public Date getSoldDate() {
+		return soldDate;
+	}
+
+	public void setSoldDate(Date soldDate) {
+		this.soldDate = soldDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Bike [id=" + id + ", brand=" + brand + ", modelName=" + modelName + ", running=" + running
 				+ ", regDate=" + regDate + ", noOfOwner=" + noOfOwner + ", insurance=" + insurance + ", iExpDate="
 				+ iExpDate + ", price=" + price + ", contactNo=" + contactNo + ", contactName=" + contactName
-				+ ", address=" + address + ", bLocation=" + bLocation + ", status=" + status + ", state=" +state +  "]";
+				+ ", address=" + address + ", bLocation=" + bLocation + ", status=" + status + ", state=" +state + ",soldDate=" +soldDate+ "]";
 	}
 
 

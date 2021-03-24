@@ -64,6 +64,6 @@
         </div>
     </div>
 </div>
-
+<btag:footer />
 </body>
 </html>

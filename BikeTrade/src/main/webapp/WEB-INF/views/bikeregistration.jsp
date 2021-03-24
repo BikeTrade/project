@@ -14,6 +14,7 @@
 </head>
 <body>
 <btag:header />
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -50,7 +51,7 @@
                 </div>
 				
 				<div class="form-group">
-                    <div class="col-sm-9">
+                    <div class="col-sm-9"><label  class="control-label">Bike Registration Date</label>
                           <form:input type="date" path="regDate" name="regDate" placeholder="Registration Date"
                                class="form-control"/>
                             <div class="has-error"><form:errors path="regDate" class="text-danger"/></div>   
@@ -78,7 +79,7 @@
                 </div>
 			
 				<div class="form-group">
-                    <div class="col-sm-9">
+                    <div class="col-sm-9"><label  class="control-label">Insurance Expire Date</label>
                           <form:input type="date" path="iExpDate" name="iExpDate" placeholder="Insurance Expire Date"
                                class="form-control"/>
                             <div class="has-error"><form:errors path="iExpDate" class="text-danger"/></div>   
@@ -171,11 +172,12 @@
                         <button type="submit" class="btn btn-primary btn-block">Register Bike</button>
                     </div>
                 </div>
-                
+               
               
             </form:form>
           </div>
        </div>
-  </div>              
+  </div>    
+          <btag:footer />   
 </body>
 </html>

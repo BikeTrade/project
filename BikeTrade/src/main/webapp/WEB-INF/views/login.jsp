@@ -30,6 +30,7 @@
 				<h4><a href="${signup}">Click Here For New User Registration</a></h4>
 			</div>		
 		</form:form>
-	</div>	
+	</div>	<br/><br/><br/>
+	<btag:footer />
 </body>
 </html>

@@ -106,7 +106,7 @@ public class BTUserController {
 			return modelAndView;
 	}
 	
-	@GetMapping(value = "/updatebike") // to get the form
+	@GetMapping(value = "/updatebike") 
 	public ModelAndView updateform(@RequestParam long bikeid) {
 		ModelAndView modelAndView = new ModelAndView();
 	
@@ -122,7 +122,7 @@ public class BTUserController {
 		return modelAndView;
 	}
 	@RequestMapping(value = "/updatebike", method = RequestMethod.POST) // to show the form
-	public ModelAndView registerNewBike(@Valid @ModelAttribute("bikeform") BikeForm bikeform,
+	public ModelAndView editBike(@Valid @ModelAttribute("bikeform") BikeForm bikeform,
 			BindingResult bindingResult,@RequestParam long bikeid) throws IOException {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println("post id"+bikeid);
@@ -130,8 +130,8 @@ public class BTUserController {
 		Bike savebike= bikeService.findAllById(bikeid);
 		System.out.println("post bike object"+savebike);
 		if (bindingResult.hasErrors()) {
-			//model.addAttribute("brand_names", BrandName.values());
-			modelAndView.setViewName("bikeregistration"); // return to bike registration (this)page
+		
+			modelAndView.setViewName("update_bikeregistration"); 
 			return modelAndView;
 		}
 		

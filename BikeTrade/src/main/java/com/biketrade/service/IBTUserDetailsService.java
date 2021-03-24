@@ -3,6 +3,7 @@ package com.biketrade.service;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.biketrade.model.BikeState;
 import com.biketrade.model.User;
 
 public interface IBTUserDetailsService {
@@ -15,5 +16,10 @@ public interface IBTUserDetailsService {
     public User saveUser(User user);
     
     public User getCurrentUser();
+    
+    
+    
+    
+  
     
 }
