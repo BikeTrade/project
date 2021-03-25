@@ -1,7 +1,11 @@
 package com.biketrade.pojo;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -82,6 +86,21 @@ public class SBike {
     
     @Indexed(name="rightImgType", type="string")
     private String rightImgType;
+    
+    @Indexed(name="mYear", type="string")
+    private String mYear;
+        
+    @Indexed(name="sOwner", type="string")
+    private String sOwner;
+    
+    @Indexed(name="sPrice", type="string")
+    private String sPrice;
+    
+	 @Indexed(name = "likes", type = "int")
+	 private Integer likes;
+    
+   static Calendar calendar = new GregorianCalendar();	
+
 
     //Constructor
     public SBike() {
@@ -92,24 +111,6 @@ public class SBike {
 	  this.id=id;
 	}
  
-    public SBike(Long id, String brand, String modelName, Integer running, String regDate, Integer noOfOwner,
-			Boolean insurance, String iExpDate, Long price, Long contactNo, String contactName, String address,
-			String bLocation) {
-		this.id = id;
-		this.brand = brand;
-		this.modelName = modelName;
-		this.running = running;
-		this.regDate = regDate;
-		this.noOfOwner = noOfOwner;
-		this.insurance = insurance;
-		this.iExpDate = iExpDate;
-		this.price = price;
-		this.contactNo = contactNo;
-		this.contactName = contactName;
-		this.address = address;
-		this.bLocation = bLocation;
-	}
-	
 	String getFormattedDate(Date date){
 	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
 	    return formatter.format(date);
@@ -121,6 +122,8 @@ public class SBike {
 		this.modelName = bike.getModelName();
 		this.running = bike.getRunning();
 		this.regDate = getFormattedDate(bike.getRegDate());
+		calendar.setTime(bike.getRegDate());
+		setmYear(String.valueOf(calendar.get(Calendar.YEAR)));
 		this.noOfOwner = bike.getNoOfOwner();
 		this.insurance = bike.isInsurance();
 		this.iExpDate = getFormattedDate(bike.getiExpDate());
@@ -129,6 +132,29 @@ public class SBike {
 		this.contactName = bike.getContactName();
 		this.address = bike.getAddress();
 		this.bLocation = bike.getbLocation();
+	    if(bike.getNoOfOwner() == 1) {
+	    	setsOwner("First");
+	    } else if(bike.getNoOfOwner() == 2) {
+	    	setsOwner("Second");
+	    }
+	    else if(bike.getNoOfOwner() == 3) {
+	    	setsOwner("Third");
+	    }
+	    else if(bike.getNoOfOwner() == 4) {
+	    	setsOwner("Forth");
+	    }else if(bike.getNoOfOwner() == 5) {
+	    	setsOwner("Fifth");
+	    }
+	    
+	    if(bike.getPrice() >= 100000) {
+	    	DecimalFormat df = new DecimalFormat("#.##");
+	        df.setRoundingMode(RoundingMode.CEILING);	         
+	    	setsPrice(String.valueOf(df.format(getPrice()/100000.00)) + " Lakh");
+	    }else
+	    {
+	    	setsPrice(getPrice().toString());
+	    }
+
 		
         try {
         	byte[] frontImg = Base64.encodeBase64(bike.getBikeImages().get(0).getPicByte());
@@ -195,6 +221,16 @@ public class SBike {
 			return "50000_more";
 	}
 	
+	
+	
+
+	public String getsOwner() {
+		return sOwner;
+	}
+
+	public void setsOwner(String sOwner) {
+		this.sOwner = sOwner;
+	}
 
 	public Long getId() {
 		return id;
@@ -210,6 +246,26 @@ public class SBike {
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+	
+	
+	
+	
+
+	public Integer getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Integer likes) {
+		this.likes = likes;
+	}
+
+	public String getsPrice() {
+		return sPrice;
+	}
+
+	public void setsPrice(String sPrice) {
+		this.sPrice = sPrice;
 	}
 
 	public String getModelName() {
@@ -378,6 +434,16 @@ public class SBike {
 
 	public void setPriceRange(String priceRange) {
 		this.priceRange = priceRange;
+	}
+	
+	
+
+	public String getmYear() {
+		return mYear;
+	}
+
+	public void setmYear(String mYear) {
+		this.mYear = mYear;
 	}
 
 	@Override

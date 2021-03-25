@@ -1,5 +1,7 @@
 package com.biketrade.service;
 
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -17,9 +19,6 @@ public interface IBTUserDetailsService {
     
     public User getCurrentUser();
     
-    
-    
-    
-  
+    public List<User> findUserByIds(List<Integer> ids);
     
 }

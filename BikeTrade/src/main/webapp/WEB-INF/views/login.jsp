@@ -27,7 +27,7 @@
 				<input type="submit" name="submit" value="LOGIN"><br/>
 				<font color="red"> ${message}</font><br />
 				<spring:url value="/registration" var="signup" />
-				<h4><a href="${signup}">Click Here For New User Registration</a></h4>
+				<h5><u><a href="${signup}">Click Here For Sign Up</a></u></h5>
 			</div>		
 		</form:form>
 	</div>	<br/><br/><br/>

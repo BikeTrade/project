@@ -55,7 +55,7 @@
                 
                         
                         <spring:url value="/upi" var="upiURL" />
-				<form:form autocomplete="off" action="${upiURL}" method="post"  modelAttribute="payment">
+				<form:form autocomplete="off" action="${upiURL}" method="post"  modelAttribute="paymentForm">
                         <div class="card-body" style="height: 350px">
                             <div class="form-group"> <label for="cc-number" class="control-label">UPI Number</label> 
                             <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="Enter UPI Number" required> </div>
@@ -74,7 +74,7 @@
                            
                             <div class="form-group"> <input value="MAKE PAYMENT" type="submit" class="btn btn-success btn-lg form-control" style="font-size: .8rem;"> </div>
                         </div>
-                      
+                      		<input type="hidden" NAME="bike" VALUE="${bikeid}"/>
                         </form:form>
                     </div>
                 </div>

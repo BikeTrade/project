@@ -19,6 +19,8 @@ public interface IBTBikeDetailsService {
 	public int countByStatus(BikeStatus status);
 	public int countByState(BikeState state);
 	public Bike findAllById(long bikeid);
+	public List<Bike> findByIdIn( List<Long> user);
+	 
 	
 	
 	  public int countByBrandAndStateAndStatus(BrandName brand,BikeState state,BikeStatus status);

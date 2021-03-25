@@ -44,9 +44,18 @@ public class User {
     @Column(name = "name")
     @NotEmpty(message = "*Please provide your name")
     private String name;
+    
     @Column(name = "last_name")
     @NotEmpty(message = "*Please provide your last name")
     private String lastName;
+    
+    @Column(name = "contact_no")
+    @NotEmpty(message="*Please provide your Contact Number")
+    private String contactNo;
+    
+    @Column(name="address")
+    @NotEmpty(message="*Please provide your Address")
+    private String address;
     
     @Column(name = "active")
     private Boolean active;
@@ -104,4 +113,18 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	public String getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
 }

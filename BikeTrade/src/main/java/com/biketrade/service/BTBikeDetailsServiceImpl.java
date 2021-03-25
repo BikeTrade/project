@@ -88,6 +88,13 @@ public class BTBikeDetailsServiceImpl implements IBTBikeDetailsService {
 		return bikeRepository.countByStateAndSoldDate(state, soldDate);
 	}
 	
+	@Override
+	public List<Bike> findByIdIn( List<Long> user){
+		return bikeRepository.findByIdIn(user);
+	}
+
+ 
+	
 	
 	
 	

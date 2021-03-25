@@ -42,6 +42,7 @@ public interface BTBikeRepository extends JpaRepository<Bike, Integer>{
 	public int countByState(BikeState state);
 	
 	public int countByBrandAndStateAndStatus(BrandName brand,BikeState state,BikeStatus status);
+	List<Bike> findByIdIn( List<Long> user);
 	
 	
 	@Query("select count(*) from Bike b where monthname(b.soldDate)=:soldDate and b.state= :state")

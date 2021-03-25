@@ -12,7 +12,6 @@
 <body>
 <btag:header />
 
-	</div>
 	<btag:footer />
 </body>
 </html>

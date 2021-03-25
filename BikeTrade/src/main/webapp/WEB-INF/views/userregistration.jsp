@@ -58,6 +58,7 @@
                              </div>
                     </div>
                 </div>
+                
                 <div class="form-group">
                     <div class="col-sm-9">
                         <form:input type="password" name="password" path="password"
@@ -65,6 +66,26 @@
                          <div class="has-error">
                                  <form:errors path="password" class="text-danger"/>
                           </div>      
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <form:input type="text" name="contactNo" path="contactNo"
+                               placeholder="Contact No" class="form-control"/> 
+                         <div class="has-error">
+                                 <form:errors path="contactNo" class="text-danger"/>
+                          </div>      
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-9">
+                    	<form:select path="address" name="address" class="form-control">
+                    	    <option>Select City</option>
+                    		<form:options items="${cities}"/>
+                    	</form:select>   
+       	                <div class="has-error"><form:errors path="address" class="text-danger"/></div>  
                     </div>
                 </div>
 

@@ -25,8 +25,11 @@ public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
-	private String payeeName;
+	private String payeeName;	
+	private String razorpay_payment_id;
+	private String razorpay_order_id;
+	private String razorpay_signature;
+	private String receiptId;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "payment_mode")
@@ -37,6 +40,14 @@ public class Payment {
 	@OneToOne
 	@JoinColumn(name = "bike_id")
 	private Bike bike;
+	
+	@OneToOne
+	@JoinColumn(name = "buyer")
+	private User buyer;
+	
+	@OneToOne
+	@JoinColumn(name = "address")
+	private Address address;
 
 	public Payment() {
 
@@ -50,6 +61,16 @@ public class Payment {
 		this.mode = mode;
 		this.amount = amount;
 	}
+	
+	
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	public Integer getId() {
 		return id;
@@ -57,6 +78,16 @@ public class Payment {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+
+	public String getReceiptId() {
+		return receiptId;
+	}
+
+	public void setReceiptId(String receiptId) {
+		this.receiptId = receiptId;
 	}
 
 	public String getPayeeName() {
@@ -81,6 +112,48 @@ public class Payment {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	
+	
+
+	public Bike getBike() {
+		return bike;
+	}
+
+	public void setBike(Bike bike) {
+		this.bike = bike;
+	}
+
+	public User getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(User buyer) {
+		this.buyer = buyer;
+	}
+
+	public String getRazorpay_payment_id() {
+		return razorpay_payment_id;
+	}
+
+	public void setRazorpay_payment_id(String razorpay_payment_id) {
+		this.razorpay_payment_id = razorpay_payment_id;
+	}
+
+	public String getRazorpay_order_id() {
+		return razorpay_order_id;
+	}
+
+	public void setRazorpay_order_id(String razorpay_order_id) {
+		this.razorpay_order_id = razorpay_order_id;
+	}
+
+	public String getRazorpay_signature() {
+		return razorpay_signature;
+	}
+
+	public void setRazorpay_signature(String razorpay_signature) {
+		this.razorpay_signature = razorpay_signature;
 	}
 
 	@Override

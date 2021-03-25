@@ -72,7 +72,7 @@
                 
                         
                         <spring:url value="/netbank" var="debitURL" />
-				<form:form autocomplete="off" action="${debitURL}" method="post"  modelAttribute="payment">
+				<form:form autocomplete="off" action="${debitURL}" method="post"  modelAttribute="paymentForm">
                         <div class="card-body" style="height: 350px">
                             <div class="form-group"> <label for="cc-number" class="control-label">Account Number</label> 
                             <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="Enter Account Number" required> </div>
@@ -98,7 +98,7 @@
                              <input type="text"  class="input-lg form-control"  placeholder="Enter Branch Name" required/> </div>
                             <div class="form-group"> <input value="MAKE PAYMENT" type="submit" class="btn btn-success btn-lg form-control" style="font-size: .8rem;"><br/><br/> </div>
                         </div>
-                      
+                      		<input type="hidden" NAME="bike" VALUE="${bikeid}"/>
                         </form:form>
                     </div>
                 </div>

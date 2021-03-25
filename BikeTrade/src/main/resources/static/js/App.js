@@ -2,84 +2,119 @@
       
 const Carousel =ReactBootstrap.Carousel; 
 
+const Spinner = props => {
+	return (
+		<div className="overlay">
+			<div className="overlay__wrapper">
+				<div className="overlay__spinner">
+					<div className="ui segment">
+					<div className="ui active dimmer">
+						<div className="ui massive text loader">
+							Loading
+						</div>
+					</div>
+					<p></p>
+					<p></p>
+					<p></p>
+				</div>
+				</div>
+			</div>
+		</div>
+	
+			);
+}
+
 const CheckBox = props => {
     return (    
       <li>
-       <input key={props.id} onClick={props.handleCheckChieldElement} type="checkbox" checked={props.isChecked} value={props.value} /> {props.value}
+	   <input key={props.id} 
+				 onClick={props.handleCheckChieldElement} 
+				 type="checkbox" 
+				 checked={props.isChecked} 
+				 value={props.value} /> 
+				 {props.value}
       </li>
     )
 }
 
 const Menu = props => { 
-
-  return (<div className="item">
+  return (
+    <div className="item">
 	    <div className="header">{props.menuId}</div>
-	    <div className="menu">
-	      <ul>
-	        {
-	          props.facets.map((menuItem) => {
-	            return (<CheckBox handleCheckChieldElement={props.handleCheckChieldElement}  {...menuItem} />)
-	          })
-	        }
-        </ul>
-	    </div>
+		    <div className="menu">
+				<ul>
+					{	props.facets.map(
+						(menuItem) => {return (
+								<CheckBox 
+										  handleCheckChieldElement={props.handleCheckChieldElement}  
+										  {...menuItem}  />)})
+					}
+				</ul>
+	        </div>
 	  </div>);  
 }
 
 
 
 const ViewBike = props => {
-    return (	  <div className="column">
-					    <div className="ui segment">
-				       	<div className="ui medium bordered image">
-					       <Carousel>
-								  <Carousel.Item style={{'height':"300px"}}>
-								    <img style={{'height':"300px"}}
+    return (	 
+		<div className="column">
+			<div className="ui segment">
+				<div className="ui medium bordered image">
+					<Carousel  interval={15000}>
+						<Carousel.Item style={{'height':"300px"}}>
+									<img 
+									  style={{'height':"300px"}}
 								      className="d-block w-100"
 								      src={`data:${props.bike.frontImgType};base64,${props.bike.frontImg}`}
-								      alt="First slide"
-								    />
-								  </Carousel.Item>
-								   <Carousel.Item style={{'height':"300px"}}>
-								    <img  style={{'height':"300px"}}
+								      alt="First slide" />
+						</Carousel.Item>
+						<Carousel.Item style={{'height':"300px"}}>
+									<img  
+									  style={{'height':"300px"}}
 								      className="d-block w-100"
 								      src={`data:${props.bike.backImgType};base64,${props.bike.backImg}`}
-								      alt="First slide"
-								    />
-								  </Carousel.Item>
-								   <Carousel.Item style={{'height':"300px"}}>
-								    <img style={{'height':"300px"}}
+								      alt="First slide" />
+						</Carousel.Item>
+						<Carousel.Item style={{'height':"300px"}}>
+									<img 
+									  style={{'height':"300px"}}
 								      className="d-block w-100"
 								      src={`data:${props.bike.leftImgType};base64,${props.bike.leftImg}`}
-								      alt="First slide"
-								    />
-								  </Carousel.Item>
-								   <Carousel.Item style={{'height':"300px"}}>
-								    <img style={{'height':"300px"}}
+								      alt="First slide" />
+						</Carousel.Item>
+						<Carousel.Item style={{'height':"300px"}}>
+									<img 
+									  style={{'height':"300px"}}
 								      className="d-block w-100"
 								      src={`data:${props.bike.rightImgType};base64,${props.bike.rightImg}`}
-								      alt="First slide"
-								    />
-								  </Carousel.Item>
-							 </Carousel>
-				       		 <span> {props.bike.id} </span> <br></br>
-				       		 <span>Brand {props.bike.brand} </span> <br></br>        
-					       	 <span> Model {props.bike.modelName} </span><br></br> 
-					       	 <span>Price {props.bike.price} </span><br></br> 
-				          	 <span>Location {props.bike.bLocation} </span><br></br> 
-				             <span>Running {props.bike.running} </span><br></br> 
-				          	 <div class="ui labeled button" tabindex="0">
-								  <div class="ui blue button">
-								    <i class="heart icon"></i> Like
-								  </div>
-								  <a class="ui basic blue left pointing label">
-								    0
-								  </a>
-							</div>
-							<button class="positive ui button">Buy</button>
-				       </div>
+								      alt="First slide"  />
+						</Carousel.Item>
+					</Carousel>		
+
+					<div className="gsc_col-sm-12 gsc_col-md-12 trustmarkbox holder">
+						<div className="title">
+							<a className="" title="2014 Hero Splendor Plus Self Alloy" href="javascript:void(0);">
+							{ props.bike.mYear} {props.bike.modelName}
+							</a>
+						</div>
+						<div className="dotlist truncate">
+							<span>{props.bike.running} km</span>
+							<span>• &nbsp;Petrol</span>
+							<span>• &nbsp;{props.bike.sOwner}</span>
+						</div>
+						<div className="price">
+							<span className="icon-cd_R">Rs.</span>
+							<span className="amnt">{props.bike.sPrice}<sup class="p-star">*</sup></span>
+						</div>
+						<span className="truncate storelocation"></span>
+						<div>
+							<a href={`http://localhost:8080/biketrade/interested?bikeId=${props.bike.id}`} className="btn btn-info" role="button">View Bike Details</a>
+						</div>
+					</div>	 
+				</div>
      	    </div>
-	  </div> 
+	    </div> 
     )
 }
 
@@ -88,6 +123,7 @@ const ViewBike = props => {
       
    class App extends React.Component { 
    state = {
+	  loading:true, 
       brands: [
 		        {id: 1, value: "HERO", isChecked: false},
 				{id: 2, value: "YAMAHA", isChecked: false},
@@ -136,6 +172,7 @@ const ViewBike = props => {
   }
   
   getBikeDetails=()=>{
+	this.setState({loading:true});  
     const brandFilter = this.state.brandSelectedOptions.length === 0 ? '*' : this.state.brandSelectedOptions.toString();
   	const priceRangeFilter = this.state.priceRangeSelectedOptions.length === 0 ? '*' : this.state.priceRangeSelectedOptions.toString();
   	const kmRangeFilter = this.state.kmRangeOption.length === 0 ? '*' : this.state.kmRangeOption.toString();
@@ -149,7 +186,10 @@ const ViewBike = props => {
 			      			cityRangeFilter:cityRangeFilter
 			   			 }})
 			      .then(res => {
-			        	this.setState({bikes: res.data });}, 
+						this.setState({bikes: res.data }, () => {
+						this.setState({loading:false});
+						});
+					}, 
 			      (error) => {
 					    console.log(error);
 				})
@@ -196,7 +236,8 @@ const ViewBike = props => {
   
   onRemovePriceItem = i =>{ 
   	this.setState(state => {
-			      const priceRangeSelectedOptions = state.priceRangeSelectedOptions.filter(function (str) { return !str.includes(i); });			    		 
+				  const priceRangeSelectedOptions = state.priceRangeSelectedOptions.
+				  										  filter(function (str) { return !str.includes(i); });			    		 
 			      return {
 			        priceRangeSelectedOptions,
 			      };
@@ -286,21 +327,17 @@ const ViewBike = props => {
           {
          	 ct.isChecked =  event.target.checked; 
          	 let index = cityOption.indexOf(ct.value);
-         	 if(index === -1){ 
-	         	 
+         	 if(index === -1){	         	 
 	         	 this.setState({cityOption : [...cityOption,ct.value]},() => {
-          		 	this.getBikeDetails();
-          		 }); 
+          		 	this.getBikeDetails();}); 
          	 } 	 
           }
     }) 
        
     this.setState({city: city});
-    if(event.target.checked === false){
-    
+    if(event.target.checked === false){    
     	 let index = cityOption.indexOf(event.target.value);
-    	 if(index !== -1)
-          	{
+    	 if(index !== -1){
           		  this.onRemoveCtItem(event.target.value);  		 
           	}
     	}
@@ -308,20 +345,26 @@ const ViewBike = props => {
   
 
   render() {
+  
+  
+  if(this.state.loading){  
+ 	 return (<Spinner />);
+  }
+  
+  
     return (
-			<div className="ui segment">
-				 
-					    <div className="row">
-					  		<div className="col-3 menu">						
+			<div className="ui segment">									 
+					    <div className="row">					  
+					  		<div className="col-2 menu">						
 									<div className="ui vertical menu">
-										<Menu menuId='Brands'  facets={this.state.brands}  handleCheckChieldElement={this.handleCheckChieldElement}  />
+										<Menu menuId='Brands'       facets={this.state.brands}      handleCheckChieldElement={this.handleCheckChieldElement}  />
 										<Menu menuId='Price Range'  facets={this.state.priceRange}  handleCheckChieldElement={this.handlePriceRangeElement}  />
-										<Menu menuId='KM Range'  facets={this.state.kmRange}  handleCheckChieldElement={this.handleKmRangeElement}  />
-										<Menu menuId='Cities'  facets={this.state.city}  handleCheckChieldElement={this.handleSelectedCityElement}  />
+										<Menu menuId='KM Range'     facets={this.state.kmRange}     handleCheckChieldElement={this.handleKmRangeElement}  />
+										<Menu menuId='Cities'       facets={this.state.city}        handleCheckChieldElement={this.handleSelectedCityElement}  />
 									</div>						
 							</div>
-							<div className="col-9">	
-								<div className="ui three column grid">	
+							<div className="col-10">	
+								<div className="ui four column grid">	
 									{
 									this.state.bikes.map((bike) => {
 										return (<ViewBike bike={bike} />)
@@ -329,8 +372,7 @@ const ViewBike = props => {
 									}			
 								</div>
 							</div>
-						</div>
-							
+						</div>							
 			</div>    
     );
   }

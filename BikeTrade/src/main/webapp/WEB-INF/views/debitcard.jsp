@@ -84,7 +84,7 @@
                         </div>
                         
                         <spring:url value="/debit" var="debitURL" />
-				<form:form autocomplete="off" action="${debitURL}" method="post"  modelAttribute="payment" name="form">
+				<form:form autocomplete="off" action="${debitURL}" method="post"  modelAttribute="paymentForm" name="form">
                         <div class="card-body" style="height: 350px">
                             <div class="form-group"> <label for="cc-number" class="control-label">CARD NUMBER</label> 
                             <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required> </div>
@@ -112,7 +112,7 @@
                             <div class="form-group">
                              <input value="MAKE PAYMENT" type="submit" class="btn btn-success btn-lg form-control" style="font-size: .8rem;"> </div>
                         </div>
-                      
+                      		 <input type="hidden" NAME="bike" VALUE="${bikeid}"/>
                         </form:form>
                     </div>
                 </div>

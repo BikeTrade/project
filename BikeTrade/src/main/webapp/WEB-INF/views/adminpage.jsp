@@ -130,30 +130,7 @@ background-color: #1E90FF;
 			</table>
 		</c:otherwise>
 	</c:choose>
-
-
-
-
 	<a href="<spring:url value='/getcount'/>">Summerise </a>
-
-
-
-
-
-
-
-	<spring:url value="/payment" var="debitURL" />
-
-	<form autocomplete="off" action="${debitURL}">
-		<input type="radio" name="paymentmode" value="1" />debitr
-		 <input type="radio" NAME="paymentmode" VALUE="2" />netbankr
-			 <input	type="radio" NAME="paymentmode" VALUE="3" />upi 
-			 <input type="submit" value="pay radio" />
-	</form>
-
-
-
-
 </div>
 	<btag:footer />
 </body>

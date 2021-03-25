@@ -75,20 +75,20 @@ html {
 }
 
 html {
-	background: #999;
+	background: #46a6d2;
 	cursor: default;
 }
 
-body {
+.divbody {
 	box-sizing: border-box;
-	height: 11in;
+	height: 5.5in;
 	margin: 0 auto;
 	overflow: hidden;
 	padding: 0.5in;
 	width: 8.5in;
 }
 
-body {
+.divbody {
 	background: #FFF;
 	border-radius: 1px;
 	box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
@@ -133,7 +133,7 @@ header span, header img {
 header span {
 	margin: 0 0 1em 1em;
 	max-height: 25%;
-	max-width: 60%;
+	max-width: 50%;
 	position: relative;
 }
 
@@ -198,12 +198,16 @@ table.balance td {
 
 /* aside */
 @page {
-	margin: 0;
+	margin: auto;
+}
+
+.thanktag{
+	align-content: center;
 }
 </style>
 </head>
 <body>
-
+	<div class="divbody">
 	<header>
 		<h1>RECEIPT</h1>
 	</header>
@@ -211,11 +215,13 @@ table.balance td {
 		<table class="meta1">
 			<tr>
 				<th><span>Reciver</span></th>
-				<td><span>$</span></td>
+				<td><span>${payment.address.firstName} ${payment.buyer.lastName}</span></td>
 			</tr>
 			<tr>
 				<th><span>Reciver Adress</span></th>
-				<td><span>$</span></td>
+				<td><span>${payment.address.street} ${payment.address.area} <br>${payment.address.city} <br>${payment.address.state} <br>${payment.address.country}<br>
+				${payment.address.email}<br>${payment.address.contactNo}
+				</span></td>
 			</tr>
 			
 		</table>
@@ -224,7 +230,7 @@ table.balance td {
 		<table class="meta">
 			<tr>
 				<th><span>Transaction Id</span></th>
-				<td><span data-prefix>BT03</span><span>${transaction}</span></td>
+				<td><span data-prefix>BT03</span><span>${payment.receiptId}</span></td>
 			</tr>
 			<tr>
 				<th><span>Date</span></th>
@@ -232,7 +238,7 @@ table.balance td {
 			</tr>
 			<tr>
 				<th><span>Payee Name</span></th>
-				<td><span>${payeeName}</span></td>
+				<td><span>${payment.address.firstName} ${payment.buyer.lastName}</span></td>
 			</tr>
 		</table>
 		<table class="inventory">
@@ -246,10 +252,10 @@ table.balance td {
 			</thead>
 			<tbody>
 				<tr>
-					<td><span>${fillthis}</span></td>
-					<td><span>${fillthis}</span></td>
-					<td><span>${fillthis}</span></td>
-					<td><span data-prefix>₹</span><span>${amount}</span></td>
+					<td><span>${payment.bike.brand}</span></td>
+					<td><span>${payment.bike.modelName}</span></td>
+					<td><span>${payment.bike.user.name} ${payment.bike.user.lastName}</span></td>
+					<td><span data-prefix>₹</span><span>${payment.amount}</span></td>
 				</tr>
 			</tbody>
 		</table>
@@ -257,23 +263,24 @@ table.balance td {
 		<table class="balance">
 			<tr>
 				<th><span>Total</span></th>
-				<td><span data-prefix>₹</span><span>${amount}</span></td>
+				<td><span data-prefix>₹</span><span>${payment.amount}</span></td>
 			</tr>
 			<tr>
 				<th><span>Amount Paid</span></th>
-				<td><span data-prefix>₹</span><span>${amount}</span></td>
+				<td><span data-prefix>₹</span><span>${payment.amount}</span></td>
 			</tr>
 			<tr>
 				<th><span>Payment Mode</span></th>
-				<td><span>${paymode}</span></td>
+				<td><span>${payment.mode}</span></td>
 			</tr>
+			<tr></tr>
+			<tr>
+				<spring:url value="/"  var="homeURL"/>
+				<th><a href="${homeURL}">Print</a></th>
+				<th><a href="${homeURL}">Download</a></th>
+			</tr>	
 		</table>
 	</article>
-	<aside>
-
-		<div>
-			<p>Thank You For Using Our Website</p>
-		</div>
-	</aside>
+	</div>	
 </body>
 </html>

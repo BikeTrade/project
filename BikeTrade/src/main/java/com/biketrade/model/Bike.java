@@ -1,5 +1,6 @@
 package com.biketrade.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -96,6 +97,9 @@ public class Bike {
 
 	@Enumerated(EnumType.STRING)
 	private BikeState state;
+	
+	@Column(name = "likes")
+	private Integer likes;
 		
 	@Column(name = "sold_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -108,6 +112,10 @@ public class Bike {
 	@ManyToOne(fetch=FetchType.EAGER, optional = false)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
+	
+	
+	@OneToMany( fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
+	private List<BikeInterestedUser> interestedUsers = new ArrayList<>();
 	
 	 
 	
@@ -216,6 +224,15 @@ public class Bike {
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 	}
+	
+
+	public Integer getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Integer likes) {
+		this.likes = likes;
+	}
 
 	public String getAddress() {
 		return address;
@@ -276,6 +293,14 @@ public class Bike {
 
 	public void setState(BikeState state) {
 		this.state = state;
+	}
+	
+	public List<BikeInterestedUser> getInterestedUsers() {
+		return interestedUsers;
+	}
+
+	public void setInterestedUsers(List<BikeInterestedUser> interestedUsers) {
+		this.interestedUsers = interestedUsers;
 	}
 
 	

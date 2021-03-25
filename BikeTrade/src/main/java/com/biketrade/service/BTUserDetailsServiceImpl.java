@@ -86,4 +86,9 @@ public class BTUserDetailsServiceImpl implements IBTUserDetailsService,UserDetai
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return findUserByUserName(auth.getName());		
 	}
+
+	@Override
+	public List<User> findUserByIds(List<Integer> ids) {		 
+		return userRepository.findByIdIn(ids);
+	}
 }
