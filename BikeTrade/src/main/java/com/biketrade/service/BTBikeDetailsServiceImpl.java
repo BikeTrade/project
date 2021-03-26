@@ -20,7 +20,6 @@ public class BTBikeDetailsServiceImpl implements IBTBikeDetailsService {
 
 	@Autowired
 	public BTBikeRepository bikeRepository;
-
  
 
 	@Override
@@ -90,6 +89,11 @@ public class BTBikeDetailsServiceImpl implements IBTBikeDetailsService {
 	@Override
 	public List<Bike> findByIdIn( List<Long> user){
 		return bikeRepository.findByIdIn(user);
+	}
+
+	@Override
+	public List<Bike> findByState(BikeState state) {
+		return bikeRepository.findByState(state);
 	}
 
  

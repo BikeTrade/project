@@ -230,7 +230,7 @@ table.balance td {
 		<table class="meta">
 			<tr>
 				<th><span>Transaction Id</span></th>
-				<td><span data-prefix>BT03</span><span>${payment.receiptId}</span></td>
+				<td><span>${payment.receiptId}</span></td>
 			</tr>
 			<tr>
 				<th><span>Date</span></th>

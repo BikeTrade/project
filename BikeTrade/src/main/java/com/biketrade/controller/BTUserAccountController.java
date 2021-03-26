@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.biketrade.dao.BTInterestedBikeRepository;
+import com.biketrade.dao.BTPaymentRepositroy;
 import com.biketrade.dao.ImageRepository;
 import com.biketrade.form.BikeForm;
 import com.biketrade.model.Bike;
@@ -28,6 +29,7 @@ import com.biketrade.model.BikeState;
 import com.biketrade.model.BikeStatus;
 import com.biketrade.model.BrandName;
 import com.biketrade.model.ImageModel;
+import com.biketrade.model.Payment;
 import com.biketrade.model.User;
 import com.biketrade.service.IBTBikeDetailsService;
 import com.biketrade.service.IBTUserDetailsService;
@@ -43,6 +45,10 @@ public class BTUserAccountController {
 	
 	@Autowired
 	BTInterestedBikeRepository btInterestedBikeRepository;
+	
+	
+	@Autowired
+	BTPaymentRepositroy btPaymentRepositroy;
 	
 
 	@Autowired
@@ -120,8 +126,9 @@ public class BTUserAccountController {
 	}
 	
 	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET)
-	public ModelAndView model(Model model) {
-		ModelAndView modelAndView = new ModelAndView();
+	public ModelAndView model(ModelAndView modelAndView) {
+		List<Payment> orders =btPaymentRepositroy.findByBuyer(userService.getCurrentUser());
+		modelAndView.addObject("orders", orders);
 		modelAndView.setViewName("orderhistory");
 		return modelAndView;
 	}

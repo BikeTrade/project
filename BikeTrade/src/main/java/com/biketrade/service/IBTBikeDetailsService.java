@@ -1,6 +1,5 @@
 package com.biketrade.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.biketrade.model.Bike;
@@ -20,7 +19,7 @@ public interface IBTBikeDetailsService {
 	public int countByState(BikeState state);
 	public Bike findAllById(long bikeid);
 	public List<Bike> findByIdIn( List<Long> user);
-	 
+	public List<Bike> findByState(BikeState state); 
 	
 	
 	  public int countByBrandAndStateAndStatus(BrandName brand,BikeState state,BikeStatus status);

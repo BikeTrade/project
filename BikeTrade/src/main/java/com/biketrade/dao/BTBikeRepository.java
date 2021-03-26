@@ -1,6 +1,5 @@
 package com.biketrade.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,35 +15,36 @@ import com.biketrade.model.BrandName;
 import com.biketrade.model.User;
 
 @Repository
-public interface BTBikeRepository extends JpaRepository<Bike, Integer>{
-	
+public interface BTBikeRepository extends JpaRepository<Bike, Integer> {
+
 	@Modifying
 	@Query("update Bike b set b.status = :status where b.id = :bid")
 	public int updateBike(@Param(value = "bid") Long bid, @Param(value = "status") BikeStatus status);
-	
-	public List<Bike> findByStatus(BikeStatus status);
-	
-	public List<Bike> findByUser(User user);
-	
 
-	//to show on useraccount
+	public List<Bike> findByStatus(BikeStatus status);
+
+	public List<Bike> findByUser(User user);
+
+	// to show on useraccount
 	public List<Bike> findById(long bikeid);
-	
-	//to edit/update bikedetails
+
+	// to edit/update bikedetails
 	public Bike findAllById(long bikeid);
-	
-	//get all count
+
+	// get all count
 	public long count();
-	
-	
+
 	public int countByStatus(BikeStatus status);
-	
+
 	public int countByState(BikeState state);
-	
-	public int countByBrandAndStateAndStatus(BrandName brand,BikeState state,BikeStatus status);
-	List<Bike> findByIdIn( List<Long> user);
-	
-	
+
+	public int countByBrandAndStateAndStatus(BrandName brand, BikeState state, BikeStatus status);
+
+	List<Bike> findByIdIn(List<Long> user);
+
 	@Query("select count(*) from Bike b where monthname(b.soldDate)=:soldDate and b.state= :state")
-	public int countByStateAndSoldDate(@Param(value = "state") BikeState state,@Param(value = "soldDate") String soldDate);
+	public int countByStateAndSoldDate(@Param(value = "state") BikeState state,
+			@Param(value = "soldDate") String soldDate);
+
+	List<Bike> findByState(BikeState state);
 }

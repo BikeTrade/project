@@ -23,23 +23,20 @@
 	</h3>
 	<table border="1" class="table table-striped table-borderd">
 		<tr class="thead-dark">
-			<th scope="col">Bike ID</th>
+			<th scope="col">Receipt ID</th>
+			<th scope="col">Purchase Date</th>
 			<th scope="col">Brand</th>
 			<th scope="col">Model Name</th>
-			<th scope="col">Running</th>
-			<th scope="col">Registration Date</th>
-			<th scope="col">Price</th>
+			<th scope="col">Amount</th>
 		</tr>
 		<tbody>
-			<c:forEach var="ibikes" items="${interestedBikes}">
+			<c:forEach var="order" items="${orders}">
 				<tr>
-					<th scope="row">${ibikes.id}</th>
-					<th scope="row">${ibikes.brand}</th>
-					<th scope="row">${ibikes.modelName}</th>
-					<th scope="row">${ibikes.running}</th>
-					<th scope="row">${ibikes.regDate}</th>
-					<th scope="row">${ibikes.price}</th>
-					<th scope="row">${ibikes.status}</th>
+					<th scope="row">${order.receiptId}</th>
+					<th scope="row">${order.purchaseDate}</th>
+					<th scope="row">${order.bike.brand}</th>
+					<th scope="row">${order.bike.modelName}</th>
+					<th scope="row">${order.amount}</th>
 					</tr>
 			</c:forEach>
 		</tbody>

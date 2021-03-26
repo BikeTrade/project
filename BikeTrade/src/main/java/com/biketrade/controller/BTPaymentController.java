@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.biketrade.dao.BTAddressRepository;
+import com.biketrade.dao.BTPaymentFailureRepository;
+import com.biketrade.dao.BTSolrRepository;
 import com.biketrade.form.PaymentAuth;
 import com.biketrade.form.PaymentForm;
 import com.biketrade.model.Address;
 import com.biketrade.model.Bike;
 import com.biketrade.model.BikeState;
+import com.biketrade.model.BikeStatus;
 import com.biketrade.model.Payment;
+import com.biketrade.model.PaymentFailure;
 import com.biketrade.model.PaymentMode;
 import com.biketrade.model.User;
 import com.biketrade.service.BTPaymentService;
@@ -46,6 +50,12 @@ public class BTPaymentController {
 
 	@Autowired
 	private BTAddressRepository addressService;
+	
+	@Autowired
+	private BTPaymentFailureRepository paymentFailure;
+	
+	@Autowired
+	BTSolrRepository btSolrRepository;
 
 	@RequestMapping(value = "/paymentmode", method = RequestMethod.GET)
 	public ModelAndView selectPayMode(ModelAndView modelAndView, @RequestParam Long bikeid,
@@ -87,12 +97,21 @@ public class BTPaymentController {
 			if (isEqual) {
 				System.out.println("paymentAuthentication successfull");
 				copyPaymentForm(auth, mv);
+			}else {
+				mv.setViewName("paymenterror");
 			}
 
 		} catch (RazorpayException e) {
-			// TODO Auto-generated catch block
+			mv.setViewName("paymenterror");
 			e.printStackTrace();
 		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "/payment/failure", method = RequestMethod.POST)
+	public ModelAndView paymentFailure(ModelAndView mv, PaymentFailure failure) {		 
+			paymentFailure.save(failure);
+			mv.setViewName("paymenterror");
 		return mv;
 	}
 
@@ -105,19 +124,19 @@ public class BTPaymentController {
 		BeanUtils.copyProperties(paymentForm, payment);
 		BeanUtils.copyProperties(paymentForm, address);
 		addressService.save(address);
-
 		payment.setAddress(address);
 		payment.setBuyer(buyer);
 		payment.setBike(bike);
 		payment.setAmount(bike.getPrice());
 		payment.setPayeeName(buyer.getName() + " " + buyer.getLastName());
 		payment.setMode(PaymentMode.RAZORPAY);
-
+		payment.setPurchaseDate(new Date());
+		
 		payService.savePayment(payment);
 		bike.setSoldDate(new Date());
 		bike.setState(BikeState.SOLD);
+		bike.setStatus(BikeStatus.SOLD);
 		ibTBikeDetailsService.saveBike(bike);
-
 		mv.addObject("paid", "Transaction Succesfull");
 		mv.addObject("payment", payment);
 		mv.setViewName("receipt");
@@ -126,37 +145,4 @@ public class BTPaymentController {
 
 }
 
-/*
- * @RequestMapping(value = "/payment", method = RequestMethod.GET) public
- * ModelAndView payment(ModelAndView mv, @RequestParam("paymentmode") String
- * mode, @RequestParam Long bikeid) {
- * 
- * mv.addObject("bikeid", bikeid); mv.addObject("paymentForm", new
- * PaymentForm());
- * 
- * if (mode.equals("1")) { mv.setViewName("debitcard"); } else
- * if(mode.equals("2")) { mv.setViewName("netbanking"); } else {
- * mv.setViewName("upi"); } return mv; }
- * 
- * 
- * @RequestMapping(value = "/netbank", method = RequestMethod.POST) public
- * ModelAndView netbank(PaymentForm paymentForm, BindingResult bindingResult ) {
- * ModelAndView mv = new ModelAndView(); if (bindingResult.hasErrors()); {
- * mv.setViewName("netbanking"); }
- * 
- * copyPaymentForm( paymentForm,mv); return mv; }
- * 
- * @RequestMapping(value = "/debit", method = RequestMethod.POST) public
- * ModelAndView cardPay(PaymentForm paymentForm, BindingResult bindingResult) {
- * ModelAndView mv = new ModelAndView();
- * 
- * if (bindingResult.hasErrors()); { mv.setViewName("debitcard"); }
- * copyPaymentForm( paymentForm,mv); return mv; }
- * 
- * @RequestMapping(value = "/upi", method = RequestMethod.POST) public
- * ModelAndView upiPay(PaymentForm paymentForm, BindingResult bindingResult) {
- * ModelAndView mv = new ModelAndView(); if (bindingResult.hasErrors()); {
- * mv.setViewName("debitcard"); } copyPaymentForm( paymentForm,mv);
- * 
- * return mv; }
- */
+

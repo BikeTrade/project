@@ -1,5 +1,7 @@
 package com.biketrade.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,6 +32,8 @@ public class Payment {
 	private String razorpay_order_id;
 	private String razorpay_signature;
 	private String receiptId;
+	private String orderId;
+	private Date purchaseDate;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "payment_mode")
@@ -61,8 +65,14 @@ public class Payment {
 		this.mode = mode;
 		this.amount = amount;
 	}
-	
-	
+
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
 
 	public Address getAddress() {
 		return address;
@@ -115,6 +125,14 @@ public class Payment {
 	}
 	
 	
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
 
 	public Bike getBike() {
 		return bike;

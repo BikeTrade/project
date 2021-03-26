@@ -5,6 +5,7 @@ public class PaymentAuth {
 	private String razorpay_payment_id;
 	private String razorpay_order_id;
 	private String razorpay_signature;
+	private String orderId;
 	private Integer bikeId;
 	private String receiptId;	
 	private String firstName;
@@ -18,6 +19,14 @@ public class PaymentAuth {
 	private String contactNo;
 	private String email;
 	
+	
+	
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

@@ -116,10 +116,7 @@ const ViewBike = props => {
      	    </div>
 	    </div> 
     )
-}
-
-
-      
+}     
       
    class App extends React.Component { 
    state = {

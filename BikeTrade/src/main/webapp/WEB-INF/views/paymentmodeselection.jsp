@@ -45,10 +45,7 @@
       			<div class="field">
         			<input type="text" name="lastName" placeholder="Last Name">
       			</div>	
-  			</div>
- 
- 
- 
+  			</div> 
 
       		<div class="field">
       			<lable>Address Line 1</lable>
@@ -136,6 +133,7 @@
 				<input type="hidden" name="razorpay_signature" id="razorpay_signature">
 				<input type="hidden" name="bikeId" value="${bikeid}"/>
 				<input type="hidden" name="receiptId" value="${receipt}"> 
+				<input type="hidden" name="orderId" value="${orderId}">
 		<button class="ui positive button" id="rzp-button1" tabindex="0">Make Payment</button>
 	</form>
 </div>
@@ -148,7 +146,7 @@ var options = {
     "currency": "INR",
     "name": "${bike.modelName}",
     "description": "Bike Purchase",
-    "image": "https://example.com/your_logo",
+    "image": "https://st2.depositphotos.com/4129357/11627/v/950/depositphotos_116271130-stock-illustration-motorcycle-racer-sport.jpg",
     "order_id": "${orderId}", 
     "handler": function (response){
     	document.getElementById("razorpay_payment_id").value=response.razorpay_payment_id;
@@ -170,29 +168,32 @@ var options = {
 };
 var rzp1 = new Razorpay(options);
 rzp1.on('payment.failed', function (response){
-
-	/*  
-	    alert(response.error.code);
-        alert(response.error.description);
-        alert(response.error.source);
-        alert(response.error.step);
-        alert(response.error.reason);
-        alert(response.error.metadata.order_id);
-        alert(response.error.metadata.payment_id); 
-        
-        */
-        
+    	document.getElementById("code").value=response.error.code;
+        document.getElementById("description").value=response.error.description;
+        document.getElementById("source").value=response.error.source;
+        document.getElementById("step").value=response.error.step;
+        document.getElementById("reason").value=response.error.reason;
+        document.getElementById("razorPayOrderId").value=response.error.metadata.order_id;
+        document.getElementById("payment_id").value= response.error.metadata.payment_id;
+        document.getElementById("authenticationErrorForm").submit();
 });
 document.getElementById('rzp-button1').onclick = function(e){
     rzp1.open();
     e.preventDefault();
 }
 </script>
-<%-- <spring:url value="/payment/success"  var="paymentSuccessUrl"/>
-<form action="${paymentSuccessUrl}" method="POST" id="authenticationForm"> 
-
-
-</form> --%>
+<spring:url value="/payment/failure"  var="paymentFailureUrl"/>
+<form action="${paymentFailureUrl}" method="POST" id="authenticationErrorForm"> 
+			    <input type="hidden" name="code" />
+		        <input type="hidden" name="description" />
+		        <input type="hidden" name="source" />
+		        <input type="hidden" name="step" />
+		        <input type="hidden" name="reason" />
+		        <input type="hidden" name="razorPayOrderId" />
+		        <input type="hidden" name="payment_id" /> 
+				<input type="hidden" name="receiptId" value="${receipt}"> 
+				<input type="hidden" name="orderId" value="${orderId}">
+</form>
 
 </body>
 </html>
