@@ -38,6 +38,8 @@
 						<div class="form-group">
 							<div class="col-sm-9">
 								<input type="hidden" value='${update.id}' />
+								
+								
 								<form:select path="brand" name="brand" class="form-control">
 									<form:option value="" label="Select Brand" />
 									<form:options value='${update.brand}'
@@ -177,7 +179,7 @@
 									</div>
 							</div>
 						</div>
-					
+
 						<div class="form-group">
 							<div class="col-sm-9">
 								<form:input type="hidden" path="status" class="form-control" />

@@ -49,7 +49,7 @@ public class BTBikeController {
 			BikeForm bikeform = new BikeForm();
 			modelAndView.addObject("bikeform", bikeform);
 			model.addAttribute("bikeform", new BikeForm());
-			model.addAttribute("brand_names", BrandName.values());
+			
 			modelAndView.setViewName("bikeregistration"); 
 		return modelAndView;
 	}

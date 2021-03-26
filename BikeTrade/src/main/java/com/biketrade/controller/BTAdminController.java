@@ -24,7 +24,7 @@ public class BTAdminController {
 	@RequestMapping(value = "/admin/show", method = RequestMethod.GET)
 	public ModelAndView viewAdmin(ModelAndView modelAndView) {		
 		List<Bike> lists = bikeService.findByStatus(BikeStatus.NOTAPPROVED);
-		// boolean ans = lists.isEmpty();
+		
 			if(lists.isEmpty() == true) {
 				modelAndView.addObject("message", "Every Bike is Approved" );		
 			}else {

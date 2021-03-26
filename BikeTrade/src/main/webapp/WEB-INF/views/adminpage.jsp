@@ -130,7 +130,7 @@ background-color: #1E90FF;
 			</table>
 		</c:otherwise>
 	</c:choose>
-	<a href="<spring:url value='/getcount'/>">Summerise </a>
+	
 </div>
 	<btag:footer />
 </body>

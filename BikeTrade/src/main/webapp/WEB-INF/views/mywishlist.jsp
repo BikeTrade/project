@@ -63,6 +63,6 @@
 					</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+	</table><btag:footer />
 </body>
 </html>

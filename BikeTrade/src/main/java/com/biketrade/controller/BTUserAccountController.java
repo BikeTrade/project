@@ -2,9 +2,7 @@ package com.biketrade.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -24,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.biketrade.dao.BTInterestedBikeRepository;
 import com.biketrade.dao.ImageRepository;
 import com.biketrade.form.BikeForm;
-import com.biketrade.form.InterestedUsersInBikeForm;
 import com.biketrade.model.Bike;
 import com.biketrade.model.BikeInterestedUser;
 import com.biketrade.model.BikeState;
@@ -65,13 +62,17 @@ public class BTUserAccountController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());		
 		List<Bike> bikes =bikeService.findByUser(user);
-		if(bikes!=null) {
+		if(bikes.isEmpty()== false) {
 			modelAndView.addObject("bikes", bikes);
-			modelAndView.setViewName("userbikeregistrationdetails");
-			return modelAndView;
-		}else
+			
+		}else {
 			modelAndView.addObject("message", "No Bike Resistered from Your Account");
-		return modelAndView;
+		modelAndView.setViewName("userbikeregistrationdetails");
+		
+	}
+		modelAndView.setViewName("userbikeregistrationdetails");
+	return modelAndView;
+	
 	}
 	
 	@RequestMapping(value = "/requestformybike", method = RequestMethod.GET)
@@ -93,7 +94,7 @@ public class BTUserAccountController {
 		
 		modelAndView.setViewName("requestformybike");	
 	}
-	
+	 
 	@RequestMapping(value="/interestRequest", method=RequestMethod.GET)
 	public ModelAndView getInterest(ModelAndView modelAndView,@RequestParam Long bikeid, @RequestParam int userid ) {		
 		Bike bike =bikeService.findAllById(bikeid);		

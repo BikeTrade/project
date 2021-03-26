@@ -3,7 +3,8 @@
 <%@ taglib prefix="btag" tagdir="/WEB-INF/tags/"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,12 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<spring:url value="/css/adminstyle.css" var="style" />
+<link rel="stylesheet" type="text/css" href="${style}">
+ <link rel="stylesheet" type="text/css" href="/css/registration.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script>
   
   window.onload = function () {
@@ -48,7 +55,7 @@
 		data: [
 		{
 			type: "pie",
-			//showInLegend: true,
+			
 			legendText: "{indexLabel}",
 			dataPoints: [
 				{ y: ${hero}, indexLabel: "Hero" },
@@ -162,16 +169,31 @@
 		height: auto;
 	}
 }
+.bt{
+  background-color: grey;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
 
+.bt {
+  background-color: grey;
+}
 </style>
 </head>
-<body>
+<body   >
+<div>
+<br/>
 
-	
+<a   href='<c:url value="/" />' style="float: right;" class="bt"><i class="fa fa-home" ></i>Home</a>
+</div>
+<br/><br/><br/>
 
 	<div class="container-fluid ">
 		<div class="row content">
-			
+		
 			<br>
 
 			<div >
@@ -180,7 +202,7 @@
 					<h4>Bikes Sell Report</h4>
 				</div>
 				<div class="row">
-					<div class="col-sm-4" style="">
+					<div class="col-sm-4" >
 						<div class="well">
 
 							<div id="chartContainer" style="height: 300px; width: 100%;"></div>
@@ -205,9 +227,7 @@
 						<div class="well">
 							<div id="StatusPiechartContainer"
 								style="height: 300px; width: 100%;"></div>
-							<p>
-								<a>approve</a>
-							</p>
+							
 						</div>
 					</div>
 

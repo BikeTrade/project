@@ -19,7 +19,7 @@
         <div class="col-md-6 col-md-offset-3">
         <spring:url value="/registration"  var="regURL"/>
             <form:form autocomplete="off"  action="${regURL}" method="post" class="form-horizontal" role="form" modelAttribute="user">
-                <h2>User Registration Form</h2>
+               <br/> <br/><h2>User Registration Form</h2>
                 <div class="form-group">
                     <div class="col-sm-9">
                        

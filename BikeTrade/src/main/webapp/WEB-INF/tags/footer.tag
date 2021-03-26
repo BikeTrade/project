@@ -8,13 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 .footer {
- position: relative;
   bottom: 0; 
    width: 100%;
    background-color: #303030;
    color: white;
    text-align: center;
-   
+ 
+    position:relative;
+  
    }
 </style>
 
@@ -30,18 +31,14 @@
 
 </head>
 <footer>
-<div class="footer">
+<div class="footer" >
   <p>Copyright</p>
 
  
 <p class="footer-links">
-<a href="#">Home</a>
+ <a   href='<c:url value="/" />'><i class="fa fa-home"></i>Home</a>
 
-<a href="#">Blog</a>
 
-<a href="#">About</a>
-
-<a href="#">Contact</a>
 </p>
                 <p class="footer-company-name"> © 2021 Bike trade Pvt. Ltd</p>
                 <div class="footer-center">

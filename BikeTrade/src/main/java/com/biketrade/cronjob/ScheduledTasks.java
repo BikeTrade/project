@@ -33,7 +33,7 @@ public class ScheduledTasks {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ScheduledTasks.class);
  
-	@Scheduled(fixedRate = 6000000)
+	@Scheduled(fixedRate = 6000)
 	public void reportCurrentTime() {
 
 		 List<Bike> bikes= bikeDetailService.findByStatus(BikeStatus.APPROVED);

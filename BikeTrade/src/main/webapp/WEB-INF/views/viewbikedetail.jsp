@@ -133,6 +133,6 @@
 				</tr>
 			</thead>
 		</table> 
-
+<btag:footer />
 </body>
 </html>
